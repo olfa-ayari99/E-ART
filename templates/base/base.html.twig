@@ -9,6 +9,44 @@
     />
     {# Run `composer require symfony/webpack-encore-bundle` to start using
     Symfony UX #} {% block stylesheets %}
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="theme-color" content="#feed01"/>
+<title>Wandau | Art & History Museum</title>
+<meta name="author" content="Themezinho">
+<meta name="description" content="For all kind of exhibition museum website">
+<meta name="keywords" content="wandau, exhibition, museum, art, history, entry, ticket, contemporary, modern, booking, visit, culture, life, centuries, roots, fancy, themezinho">
+
+<!-- SOCIAL MEDIA META -->
+<meta property="og:description" content="Wandau | Art & History Museum">
+<meta property="og:image" content="http://www.themezinho.net/wandau/preview.png">
+<meta property="og:site_name" content="wandau">
+<meta property="og:title" content="wandau">
+<meta property="og:type" content="website">
+<meta property="og:url" content="http://www.themezinho.net/wandau">
+
+<!-- TWITTER META -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@wandau">
+<meta name="twitter:creator" content="@wandau">
+<meta name="twitter:title" content="wandau">
+<meta name="twitter:description" content="Wandau | Art & History Museum">
+<meta name="twitter:image" content="http://www.themezinho.net/wandau/preview.png">
+
+<!-- FAVICON FILES -->
+<link href="ico/apple-touch-icon-144-precomposed.png" rel="apple-touch-icon" sizes="144x144">
+<link href="ico/apple-touch-icon-114-precomposed.png" rel="apple-touch-icon" sizes="114x114">
+<link href="ico/apple-touch-icon-72-precomposed.png" rel="apple-touch-icon" sizes="72x72">
+<link href="ico/apple-touch-icon-57-precomposed.png" rel="apple-touch-icon">
+<link href="ico/favicon.png" rel="shortcut icon">
+
+<!-- CSS FILES -->
+<link rel="stylesheet" href="/css/fontawesome.min.css">
+<link rel="stylesheet" href="/css/odometer.min.css">
+<link rel="stylesheet" href="/css/fancybox.min.css">
+<link rel="stylesheet" href="/css/swiper.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="/assetsFront/css/bootstrap.min.css" />
     <!-- Animate Min CSS -->
     <link rel="stylesheet" href="/assetsFront/css/animate.min.css" />
@@ -24,129 +62,202 @@
     <link rel="stylesheet" href="/assetsFront/css/magnific-popup.min.css" />
     <!-- Style CSS -->
     <link rel="stylesheet" href="/assetsFront/css/style.css" />
+    <link rel="stylesheet" href="/css/style.css">
     <!-- Responsive CSS -->
-    <link rel="stylesheet" href="/assetsFront/css/responsive.css" />
+    {# <link rel="stylesheet" href="/assetsFront/css/responsive.css" /> #}
+
+    {# <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" /> #}
 
     {% endblock %}
   </head>
   <body data-spy="scroll" data-offset="120">
-     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="preloader" id="preloader">
+        <svg viewBox="0 0 1920 1080" preserveAspectRatio="none" version="1.1">
+          <path d="M0,0 C305.333333,0 625.333333,0 960,0 C1294.66667,0 1614.66667,0 1920,0 L1920,1080 C1614.66667,1080 1294.66667,1080 960,1080 C625.333333,1080 305.333333,1080 0,1080 L0,0 Z"></path>
+        </svg>
+        <div class="inner">
+          <canvas class="progress-bar" id="progress-bar" width="200" height="200"></canvas>
+          <figure><img src="/images/preloader.png" alt="Image"></figure>
+          <small>Loading</small> </div>
+        <!-- end inner --> 
+      </div>
+      <!-- end preloder -->
+      <div class="page-transition">
+        <svg viewBox="0 0 1920 1080" preserveAspectRatio="none" version="1.1">
+          <path d="M0,0 C305.333333,0 625.333333,0 960,0 C1294.66667,0 1614.66667,0 1920,0 L1920,1080 C1614.66667,980 1294.66667,930 960,930 C625.333333,930 305.333333,980 0,1080 L0,0 Z"></path>
+        </svg>
+      </div>
+      <!-- end page-transition -->
+      <div class="smooth-scroll">
+        <div class="section-wrapper" data-scroll-section>
+          <div class="search-box">
             <div class="container">
-                <div class="logo">
-                    <a href="app-landing.html">
-                        <h3>E-ART</h3>
-                    </a>
-                </div>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a href="#home" class="nav-link">
-                                Home
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#about" class="nav-link">
-                                About
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#pricing " class="nav-link">
-                                Pricing
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#team" class="nav-link">
-                                Team
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#testimonial" class="nav-link">
-                                Testimonial
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#blog" class="nav-link">
-                                Blog
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#contact" class="nav-link">
-                                Contact
-                            </a>
-                        </li>
-                    </ul>
-
-                    <div class="others-option">
-                        <div class="d-flex align-items-center">
-                            <div class="option-item">
-                                <ul class="social-icon">
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <i class="lab la-twitter"></i>
-                                        </a>
-                                    </li>
-                
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <i class="lab la-instagram"></i>
-                                        </a>
-                                    </li>
-                
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <i class="lab la-facebook-f"></i>
-                                        </a>
-                                    </li>
-                                    
-                                    <li>
-                                        <a href="#" target="_blank">
-                                            <i class="lab la-linkedin-in"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              <div class="form">
+                <h3>SEARCH EVENT</h3>
+                <input type="search" placeholder="What are you looking for ?">
+                <input type="submit" value="SEARCH">
+              </div>
+              <!-- end form -->
+              <div class="search-events">
+                <ul>
+                  <li>
+                    <h5><a href="#">Artemisia Gentileschi talk with Maria</a></h5>
+                    <small>15 August – 31 October 2020</small> </li>
+                  <li>
+                    <h5><a href="#">Artemisia Gentileschi talk with Maria</a></h5>
+                    <small>15 August – 31 October 2020</small> </li>
+                  <li>
+                    <h5><a href="#">Artemisia Gentileschi talk with Maria</a></h5>
+                    <small>15 August – 31 October 2020</small> </li>
+                </ul>
+              </div>
+              <!-- end search-events --> 
             </div>
-        </nav>
-    {% block body %} 
+          </div>
+          <!-- end search-box -->
+          <aside class="side-widget">
+            <svg viewBox="0 0 600 1080" preserveAspectRatio="none" version="1.1">
+              <path d="M540,1080H0V0h540c0,179.85,0,359.7,0,539.54C540,719.7,540,899.85,540,1080z"></path>
+            </svg>
+            <figure class="logo"> <img src="images/logo-light.png" alt="Image"> </figure>
+            <!-- end logo -->
+            <div class="inner">
+              <div class="widget">
+                <figure><img src="images/image07.jpg" alt="Image"></figure>
+                <p>It speedily me addition <strong>weddings vicinity</strong> in pleasure. Happiness commanded an conveying breakfast in. Regard her say warmly elinor. Him these are visit front end for <u>seven walls</u>. Money eat scale now ask law learn.</p>
+              </div>
+              <!-- end widget -->
+              <div class="widget">
+                <h6 class="widget-title">Opening Hours</h6>
+                <p>Tuesday ‒ Friday: 09:00 ‒ 17:00<br>
+                  Friday ‒ Monday: 10:00 ‒ 20:00</p>
+              </div>
+              <!-- end widget --> 
+            </div>
+            <!-- end inner --> 
+              <div class="display-mobile">
+                  <div class="custom-menu">
+              <ul>
+                <li><a href="#">Eng</a></li>
+                <li><a href="#">Rus</a></li>
+              </ul>
+            </div>
+            <!-- end custom-menu -->
+            <div class="site-menu">
+              <ul>
+                <li><a href="visit.html">Visit</a></li>
+                <li><a href="exhibitions.html">Exhibitions</a></li>
+                <li><a href="collections.html">Collections</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+              </ul>
+            </div>
+            <!-- end site-menu -->
+              </div>
+              <!-- end display-mobile -->
+          </aside>
+          <nav class="navbar">
+            <div class="logo"> <a href="{{ path('app_index') }}"> <img src="images/logo.png" alt="Image"> </a> </div>
+            <!-- end logo -->
+            <div class="custom-menu">
+              <ul>
+                <li><a href="#">Eng</a></li>
+                <li><a href="#">Rus</a></li>
+              </ul>
+            </div>
+            <!-- end custom-menu -->
+            <div class="site-menu">
+              <ul>
+                <li><a href="visit.html">Visit</a></li>
+                <li><a href="exhibitions.html">Exhibitions</a></li>
+                <li><a href="collections.html">Collections</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+              </ul>
+            </div>
+            <!-- end site-menu -->
+            <div class="search-button"> <i class="far fa-search"></i> </div>
+            <!-- end search-button -->
+            <div class="hamburger-menu">
+              <svg class="hamburger" width="30" height="30" viewBox="0 0 30 30">
+                <path class="line line-top" d="M0,9h30"/>
+                <path class="line line-center" d="M0,15h30"/>
+                <path class="line line-bottom" d="M0,21h30"/>
+              </svg>
+            </div>
+            <!-- end hamburger-menu -->
+            <div class="navbar-button"> <a href="membership.html">GET A TICKET</a> </div>
+            <!-- end navbar-button --> 
+          </nav>
+          <!-- end navbar -->
+          {% block body %} 
     
-    {% endblock %} 
-    <!-- Start Copy Right Area -->
-    <div class="copy-right">
-        <div class="container">
-            <div class="copy-right-content">
-                <p>
-                    Copyright © 2022 E-ART. All Rights Reserved by  
-                    <a href="https://esprit.tn/" target="_blank">
-                        ESPRIT
-                    </a>
-                </p>
+          {% endblock %} 
+          
+          <!-- end content-section -->
+          <footer class="footer">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-4 col-md-6">
+                  <h6 class="widget-title">About Museum</h6>
+                  <ul class="footer-menu">
+                    <li><a href="#">About us </a></li>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">National work</a></li>
+                    <li><a href="#">International work</a></li>
+                  </ul>
+                </div>
+                <!-- end col-4 -->
+                <div class="col-lg-4 col-md-6">
+                  <h6 class="widget-title">Connect Us</h6>
+                  <ul class="social-media">
+                    <li><a href="#"><i class="fab fa-facebook-f"></i> /wandau-uk</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> /wandau-museum</a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i> /wandau-tv</a></li>
+                  </ul>
+                </div>
+                <!-- end col-4 -->
+                <div class="col-lg-4">
+                  <h6 class="widget-title">Visit Us Now</h6>
+                  <address class="address">
+                  Cromwell Road New Town SW7 <strong>London - England</strong> <i class="fas fa-info-circle"></i> +44 (0)20 7942 2000
+                  </address>
+                </div>
+                <!-- end col-4 --> 
+              </div>
+              <!-- end row --> 
             </div>
+            <!-- end container -->
+            <div class="footer-bottom">
+              <div class="container"> <span class="copyright">© 2021 Wandau | Art & History Museum</span> <span class="creation">Site created by <a href="#">themezinho</a></span> </div>
+              <!-- end container --> 
+            </div>
+            <!-- end footer-bottom --> 
+          </footer>
+          <!-- end footer --> 
         </div>
-    </div>
+      </div>
     <!-- End Copy Right Area -->
     {% block javascripts %}
     <!-- jQuery Min JS -->
+
+    <script src="/assetsFront/js/owl.carousel.min.js"></script>
+    <script src="js/jquery.min.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
+<script src="js/gsap.min.js"></script> 
+<script src="js/locomotive-scroll.min.js"></script> 
+<script src="js/ScrollTrigger.min.js"></script> 
+<script src="js/kinetic-slider.js"></script> 
+<script src="js/fancybox.min.js"></script> 
+<script src="js/odometer.min.js"></script> 
+<script src="js/swiper.min.js"></script> 
+<script src="js/scripts.js"></script>
     <script src="/assetsFront/js/jquery-3.5.1.min.js"></script>
     <!-- Popper Min JS -->
     <script src="/assetsFront/js/popper.min.js"></script>
     <!-- Bootstrap Min JS -->
     <script src="/assetsFront/js/bootstrap.min.js"></script>
     <!-- Owl Carousel JS -->
-    <script src="/assetsFront/js/owl.carousel.min.js"></script>
     <!-- Odometer JS -->
     <script src="/assetsFront/js/odometer.min.js"></script>
     <!-- Appear JS -->
@@ -163,6 +274,8 @@
     <script src="/assetsFront/js/contact-form-script.js"></script>
     <!-- Main JS -->
     <script src="/assetsFront/js/main.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {% endblock %}
   </body>
 </html>
