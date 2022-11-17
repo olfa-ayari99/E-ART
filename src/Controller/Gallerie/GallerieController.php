@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GallerieController extends AbstractController
 {
-    #[Route('/gallerie', name: 'app_gallerie')]
+    #[Route('/gallerie', name: 'app_galleries')]
     public function listGallerie(GallerieRepository  $repository)
     {
         $galleries = $repository->findAll();
