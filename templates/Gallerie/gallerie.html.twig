@@ -1,0 +1,45 @@
+{% extends "base/base.html.twig" %}
+
+
+{% block body %}
+	<section class="content-section" data-background="#fffbf7">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="section-title text-center">
+						<figure><img src="images/title-shape.png" alt="Image"></figure>
+						<h2>Our Galleries are most important</h2>
+					</div>
+				</div>
+			</div>
+
+			<div class="row justify-content-center">
+
+				{% for g in listGalleries %}
+
+
+					<div class="col-lg-4 col-md-6">
+						<div class="collection-box" data-scroll data-scroll-speed="0.5">
+							<figure><img src="images/collection09.jpg" alt="Image"></figure>
+							<h4>
+								<a href="collection-detail.html">{{g.adresse}}</a>
+							</h4>
+							<h3>
+								{{g.prix}}
+								dt/jour
+							</h3>
+
+							<h5>
+								{{g.description}}
+							</h5>
+
+
+						</div>
+					</div>
+
+				{% endfor %}
+
+			</div>
+		</div>
+	</section>
+{% endblock %}
