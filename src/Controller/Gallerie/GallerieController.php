@@ -34,7 +34,7 @@ class GallerieController extends AbstractController
         $form = $this->createForm(GallerieFormType::class, $gallerie);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $doctrine->getManager();
             $em->persist($gallerie);
             $em->flush();
