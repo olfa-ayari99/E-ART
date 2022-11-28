@@ -3,6 +3,7 @@
 namespace App\Controller\Gallerie;
 
 use App\Entity\Gallerie;
+use App\Entity\Notification;
 use App\Entity\User;
 use App\Form\GallerieFormType;
 use App\Repository\GallerieRepository;
@@ -64,10 +65,106 @@ class GallerieController extends AbstractController
             $em = $doctrine->getManager();
             $em->persist($gallerie);
             $em->flush();
+
+            $notif = new Notification();
+            $notif->setType("Ajout");
+            $notif->setIdGallerie($gallerie->getId());
+            $notif->setDate(new \DateTime('now'));
+            $notif->setMessage("Nouvelle gallerie ajoutée");
+
+            $em = $doctrine->getManager();
+            $em->persist($notif);
+            $em->flush();
             return $this->redirectToRoute("app_galleries");
         }
         return $this->renderForm("Gallerie/add_gallerie.html.twig", array("gallerieForm" => $form));
     }
 
+
+    #[Route('/detailGallerie/{id}', name: 'app_detail_gallerie')]
+    public function detailGalleries($id, GallerieRepository  $repository)
+    {
+        $galleries = $repository->find($id);
+        return $this->render("Gallerie/detail_gallerie.html.twig", array("listGalleries" => $galleries));
+    }
+
+    #[Route('/myGalleries', name: 'app_my_galleries')]
+    public function myGalleries(GallerieRepository  $repository)
+    {
+        $galleries = $repository->findAll();
+        return $this->render("Gallerie/my_galleries.html.twig", array("listGalleries" => $galleries));
+    }
+
+    #[Route('/deleteGallerie/{id}', name: 'app_delete_gallerie')]
+    public function deleteGallerie ($id, GallerieRepository  $repository, ManagerRegistry $doctrine )
+    {
+        $gallerie = $repository->find($id);
+        $em = $doctrine->getManager(); // $em=$this->getDoctrine()->getManager();
+        $em->remove($gallerie);
+        $em->flush();
+
+        $notif = new Notification();
+        $notif->setType("Suppression");
+        $notif->setDate(new \DateTime('now'));
+        $notif->setIdGallerie($id);
+        $notif->setMessage("Gallerie supprimée");
+
+        $em = $doctrine->getManager();
+        $em->persist($notif);
+        $em->flush();
+
+        return $this->redirectToRoute("app_my_galleries");
+    }
+
+
+    #[Route('/editGallerie/{id}', name: 'app_edit_gallerie')]
+    public function editGallerie ($id, GallerieRepository  $repository, Request $request,ManagerRegistry $doctrine, SluggerInterface $slugger )
+    {
+        $gallerie= $repository->find($id);
+        $form= $this->createForm(GallerieFormType::class,$gallerie, );
+        $form->handleRequest($request) ;
+
+        if($form->isSubmitted()){
+            $photo = $form->get('photo')->getData();
+
+            // this condition is needed because the 'brochure' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($photo) {
+                $originalFilename = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$photo->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $photo->move(
+                        $this->getParameter('galleries_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $gallerie->setImage($newFilename);
+            }
+
+            $em = $doctrine->getManager();
+            $em->flush();
+
+            $notif = new Notification();
+            $notif->setType("Modification");
+            $notif->setDate(new \DateTime('now'));
+            $notif->setIdGallerie($id);
+            $notif->setMessage("Gallerie modifiée");
+
+            $em = $doctrine->getManager();
+            $em->persist($notif);
+            $em->flush();
+            return $this->redirectToRoute("app_my_galleries");
+        }
+        return $this->renderForm("Gallerie/edit_gallerie.html.twig", array("gallerieForm" => $form, "gallerie"=>$gallerie));
+    }
 
 }

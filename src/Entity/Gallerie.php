@@ -38,6 +38,12 @@ class Gallerie
     #[ORM\JoinColumn(onDelete: "CASCADE")]
     private ?User $user = null;
 
+    /**
+     * @param int|null $id
+     */
+    public function __construct()
+    {
+    }
 
 
     public function getId(): ?int

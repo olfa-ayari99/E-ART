@@ -1,0 +1,72 @@
+{% extends 'base/base_admin.html.twig' %}
+
+{% block notif %}
+    <div class="navbar-notifications-menu__content" data-perfect-scrollbar>
+
+        {% for notif in listNotif %}
+        <div class="py-2">
+            <div class="dropdown-item d-flex">
+                <div class="flex">
+                    <b>{{ notif.type }}</b>
+                    <br>
+                    <b>ID Gallerie #{{ notif.idGallerie }}</b>
+                    <p>{{ notif.date | date("d/m/Y") }}</p>
+                    <p>{{ notif.message }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}
+
+
+
+{% block body %}
+
+        <table class="table">
+
+        <thead style="background: #1C2260">
+        <tr>
+            <th scope="col" style="color: white">#</th>
+            <th scope="col" style="width: 300px;color: white">Adresse</th>
+            <th scope="col" style="width: 120px;color: white">Prix</th>
+            <th scope="col" style="text-align: center;width: 350px;color: white">Description</th>
+            <th scope="col" style="text-align: center;width: 300px;color: white">Image</th>
+            <th scope="col" style="text-align: center;width: 350px;color: white">Options</th>
+        </tr>
+        </thead>
+
+
+        <tbody>
+
+        {% for key, g in listGalleries %}
+            <tr>
+                <th scope="row">{{ key+1 }}</th>
+                <td>{{ g.adresse }}</td>
+                <td>{{ g.prix }} Dt/Jour</td>
+                <td>{{ g.description }}</td>
+                <td><img src="{{ asset('uploads/galleries/' ~ g.image) }}" alt="Image" style="width: 180px;height: 180px"></td>
+                <td >
+                    <div style="text-align: center; width:100%;">
+
+
+                        <div class="option-delete" style="margin:0 auto; ">
+                            <h6>
+                                <a onclick="confirmDelete({{ g.id }})" ><i class="fas fa-delete" ></i> Supprimer</a>
+
+                            </h6>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+
+
+
+        </tbody>
+
+    </table>
+    {{ knp_pagination_render(listGalleries) }}
+{% endblock %}

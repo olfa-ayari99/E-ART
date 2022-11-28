@@ -39,12 +39,13 @@ class GallerieFormType extends AbstractType
                             'image/gif',
                             'image/jpeg',
                             'image/jpg',
+                            'image/png'
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid PDF document',
+                        'mimeTypesMessage' => 'Veuillez uploader une image valide',
                     ])
                 ],
             ])
-            ->add("sumbit", SubmitType::class);
+            ->add("submit", SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
