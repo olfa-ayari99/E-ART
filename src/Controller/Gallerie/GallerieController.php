@@ -13,7 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 class GallerieController extends AbstractController
 {
@@ -25,43 +24,18 @@ class GallerieController extends AbstractController
     }
 
     #[Route('/addGallerie', name: 'app_add_gallerie')]
-    public function addGallerie(Request $request, ManagerRegistry $doctrine, UserRepository $userRepository, SluggerInterface $slugger)
+    public function addGallerie(Request $request, ManagerRegistry $doctrine, UserRepository $userRepository)
     {
-        $gallerie = new Gallerie();
-        $currentUser = $userRepository->find(1);
+        $gallerie = new Gallerie(); //création d'une instance gallerie pour l'ajouter dans la bdd.
+        $currentUser = $userRepository->find(1); //récupération de propriétaire d'id = 1. Statique pour le moment.
 
-        $gallerie->setEtat(0);
-        $gallerie->setUser($currentUser);
+        $gallerie->setEtat(0); // état = 0 : disponible pour la réserver, 1 sinon.
+        $gallerie->setUser($currentUser); //attribution de cla étrangère dans la table gallerie.
 
         $form = $this->createForm(GallerieFormType::class, $gallerie);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $photo = $form->get('photo')->getData();
-
-            // this condition is needed because the 'brochure' field is not required
-            // so the PDF file must be processed only when a file is uploaded
-            if ($photo) {
-                $originalFilename = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$photo->guessExtension();
-
-                // Move the file to the directory where brochures are stored
-                try {
-                    $photo->move(
-                        $this->getParameter('galleries_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-
-                // updates the 'brochureFilename' property to store the PDF file name
-                // instead of its contents
-                $gallerie->setImage($newFilename);
-            }
             $em = $doctrine->getManager();
             $em->persist($gallerie);
             $em->flush();
@@ -79,6 +53,7 @@ class GallerieController extends AbstractController
         }
         return $this->renderForm("Gallerie/add_gallerie.html.twig", array("gallerieForm" => $form));
     }
+
 
 
     #[Route('/detailGallerie/{id}', name: 'app_detail_gallerie')]
