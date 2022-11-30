@@ -23,9 +23,9 @@ class AdminController extends AbstractController
     #[Route('/admin/listGalleries', name: 'app_admin_list_galleries')]
     public function listGalleries(Request $request, GallerieRepository  $gallerieRepository, NotificationRepository $notificationRepository, PaginatorInterface $paginator): Response
     {
-        $donnees = $gallerieRepository->findAll();
+        $galleries = $gallerieRepository->findAll();
 
-        $galleries = $paginator->paginate( $donnees, $request->query->getInt('page', 1), 5);
+        $galleries = $paginator->paginate( $galleries, $request->query->getInt('page', 1), 5);
 
         $notifs = $notificationRepository->findAll();
         return $this->render('admin/liste_galleries.html.twig', ['listGalleries' => $galleries,'listNotif'=>$notifs]);

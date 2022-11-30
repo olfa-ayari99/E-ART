@@ -17,8 +17,8 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="section-title text-center">
-						<figure><img src="images/title-shape.png" alt="Image"></figure>
-						<h2>Our Galleries are most important</h2>
+						<figure><img src="{{ asset("images/title-shape.png") }}" alt="Image"></figure>
+						<h2 style="font-size: 50px">Our Galleries are most important</h2>
 					</div>
 				</div>
 			</div>
@@ -47,19 +47,12 @@
 			</div>
 
 			<div class="row justify-content-center">
-
 				{% for g in listGalleries %}
-
-
 					<div class="col-lg-4 col-md-6">
 						<div class="collection-box" data-scroll data-scroll-speed="0.5">
-
-
 							<figure><img src="{{ asset('uploads/galleries/' ~ g.image) }}" alt="Image" style="width: 220px;height: 300px"></figure>
-
-
 							<h4>
-								<a href="{{path('app_detail_gallerie', {'id': g.id})}}">{{g.adresse}}</a>
+								<a href="{{ path('app_detail_gallerie', {'id': g.id} ) }}">{{g.adresse}}</a>
 							</h4>
 							<h3>
 								{{g.prix}}
@@ -69,14 +62,13 @@
 							<h5>
 								{{g.description}}
 							</h5>
-
-
 						</div>
 					</div>
-
 				{% endfor %}
 
 			</div>
 		</div>
 	</section>
+
+	{{ knp_pagination_render(listGalleries) }}
 {% endblock %}

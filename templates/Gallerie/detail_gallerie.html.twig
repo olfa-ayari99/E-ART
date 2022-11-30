@@ -1,34 +1,106 @@
+
+
 {% extends "base/base.html.twig" %}
-{% block body%}
-    <style>
-        .modal-content {
-            top: 350px;
-            background-color: #fefefe;
-            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-            border: 1px solid #888;
-            width: 50%; /* Could be more or less, depending on screen size */
-        }
 
-        </style>
+
+{% block body %}
+
     <section class="content-section" data-background="#fffbf7">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="section-title text-center justify-content-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center justify-content-center">
+                        <figure><img src="{{ asset("images/title-shape.png") }}" alt="Image"></figure>
+                        <h2 style="font-size: 50px">Reservation de Gallerie</h2>
 
-                    <h2>Detail Gallerie</h2>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="row" style="text-align: center">
+                    <div class="col-4">
+                        <figure>
+                            <i class="fas fa-dollar-sign" style="font-size:25px"></i>
+                        </figure>
+                        <div class="content">
+                            <h5>Prix Par Jour</h5>
+                            <p>{{ gallerie.prix }}Dt</p>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <figure>
+                            <i class="fas fa-info" style="font-size:25px"></i> </figure>
+                        <div class="content">
+                            <h5>Description</h5>
+                            <p>{{ gallerie.description }}</p>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <figure>
+                            <i class="fas fa-map-marker-alt" style="font-size:25px"></i> </figure>
+                        <div class="content">
+                            <h5>Adresse</h5>
+                            <p>{{ gallerie.adresse }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row"  style="margin-top: 40px">
+                    <div class="col-lg-7">
+                        <div class="side-icon-list right-side">
+                            <div id="calendar-holder"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <figure class="side-image is-inview" data-scroll="" data-scroll-speed="1" style="transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 48.85, 0, 1);">
+                            <img src="{{ asset('uploads/galleries/' ~ gallerie.image) }}" alt="Image">
+                        </figure>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="modal-content"></div>
-    <div class="collection-box is-inview" data-scroll="" data-scroll-speed="0.5" , class="modal-content" >
-        <figure><img src="http://wandau.themezinho.net/wp-content/uploads/2021/03/side-imag01.jpg" alt="Image"; style="width: 300px;height: 400px"></figure>
-    </div>
-    </div>
     </section>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
 
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            var calendarEl = document.getElementById('calendar-holder');
 
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                defaultView: 'dayGridMonth',
+                editable: true,
+                eventSources: [
+                    {
+                        url: "{{ path('fc_load_events') }}",
+                        method: "POST",
+                        extraParams: {
+                            filters: JSON.stringify({})
+                        },
+                        failure: () => {
+                            // alert("There was an error while fetching FullCalendar!");
+                        },
+                    },
+                ],
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay',
+                },
+                plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], // https://fullcalendar.io/docs/plugin-index
+                timeZone: 'UTC',
+            });
+            calendar.render();
+        });
+    </script>
 {% endblock %}
+

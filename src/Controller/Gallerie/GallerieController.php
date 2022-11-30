@@ -9,17 +9,21 @@ use App\Form\GallerieFormType;
 use App\Repository\GallerieRepository;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class GallerieController extends AbstractController
 {
     #[Route('/gallerie', name: 'app_galleries')]
-    public function listGallerie(GallerieRepository  $repository)
+    public function listGallerie(GallerieRepository $repository, PaginatorInterface $paginator, Request $request,) : Response
     {
         $galleries = $repository->findAll();
+
+        $galleries = $paginator->paginate( $galleries, $request->query->getInt('page', 1), 5);
         return $this->render("Gallerie/gallerie.html.twig", array("listGalleries" => $galleries));
     }
 
@@ -59,8 +63,8 @@ class GallerieController extends AbstractController
     #[Route('/detailGallerie/{id}', name: 'app_detail_gallerie')]
     public function detailGalleries($id, GallerieRepository  $repository)
     {
-        $galleries = $repository->find($id);
-        return $this->render("Gallerie/detail_gallerie.html.twig", array("listGalleries" => $galleries));
+        $gallerie = $repository->find($id);
+        return $this->render("Gallerie/detail_gallerie.html.twig", array("gallerie" => $gallerie));
     }
 
     #[Route('/myGalleries', name: 'app_my_galleries')]
