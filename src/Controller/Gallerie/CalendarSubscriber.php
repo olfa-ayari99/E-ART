@@ -2,13 +2,23 @@
 
 namespace App\Controller\Gallerie;
 
+use App\Repository\ReservationRepository;
 use CalendarBundle\CalendarEvents;
 use CalendarBundle\Entity\Event;
 use CalendarBundle\Event\CalendarEvent;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class CalendarSubscriber implements EventSubscriberInterface
 {
+
+    private ReservationRepository $reservationRepository;
+
+    public function __construct(ReservationRepository $reservationRepository)
+    {
+        $this->reservationRepository = $reservationRepository;
+    }
+
     public static function getSubscribedEvents()
     {
         return [
@@ -22,18 +32,23 @@ class CalendarSubscriber implements EventSubscriberInterface
         $end = $calendar->getEnd();
         $filters = $calendar->getFilters();
 
-        // You may want to make a custom query from your database to fill the calendar
+        $listReservation = $this->reservationRepository->findAll();
 
-        $calendar->addEvent(new Event(
-            'Event 1',
-            new \DateTime('Tuesday this week'),
-            new \DateTime('Wednesdays this week')
-        ));
+        foreach ($listReservation as $reservation) {
 
-        // If the end date is null or not defined, it creates a all day event
-        $calendar->addEvent(new Event(
-            'All day event',
-            new \DateTime('Friday this week')
-        ));
+            $bookingEvent = new Event(
+                "NON DISPONIBLE",
+                $reservation->getDateDebut(),
+                $reservation->getDateFin()
+            );
+
+            $bookingEvent->setOptions([
+                'backgroundColor' => 'red',
+                'borderColor' => 'red',
+            ]);
+
+            // finally, add the event to the CalendarEvent to fill the calendar
+            $calendar->addEvent($bookingEvent);
+        }
     }
 }

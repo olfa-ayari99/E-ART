@@ -23,11 +23,11 @@ class Reservation
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateFin = null;
 
-    #[ORM\OneToOne(inversedBy: 'gallerie', targetEntity: Gallerie::class)]
-    private Gallerie $gallerie;
+    #[ORM\OneToOne(inversedBy: 'gallerie_id', targetEntity: Gallerie::class)]
+    private  $gallerie;
 
-    #[ORM\OneToOne(inversedBy: 'user', targetEntity: User::class)]
-    private User $user;
+    #[ORM\OneToOne(inversedBy: 'user_id', targetEntity: User::class)]
+    private  $user;
 
     public function getId(): ?int
     {

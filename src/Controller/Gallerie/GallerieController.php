@@ -7,6 +7,7 @@ use App\Entity\Notification;
 use App\Entity\User;
 use App\Form\GallerieFormType;
 use App\Repository\GallerieRepository;
+use App\Repository\ReservationRepository;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
@@ -19,11 +20,11 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class GallerieController extends AbstractController
 {
     #[Route('/gallerie', name: 'app_galleries')]
-    public function listGallerie(GallerieRepository $repository, PaginatorInterface $paginator, Request $request,) : Response
+    public function listGallerie(GallerieRepository $repository, PaginatorInterface $paginator, Request $request,): Response
     {
         $galleries = $repository->findAll();
 
-        $galleries = $paginator->paginate( $galleries, $request->query->getInt('page', 1), 5);
+        $galleries = $paginator->paginate($galleries, $request->query->getInt('page', 1), 5);
         return $this->render("Gallerie/gallerie.html.twig", array("listGalleries" => $galleries));
     }
 
@@ -75,7 +76,7 @@ class GallerieController extends AbstractController
     }
 
     #[Route('/deleteGallerie/{id}', name: 'app_delete_gallerie')]
-    public function deleteGallerie ($id, GallerieRepository  $repository, ManagerRegistry $doctrine )
+    public function deleteGallerie($id, GallerieRepository  $repository, ManagerRegistry $doctrine)
     {
         $gallerie = $repository->find($id);
         $em = $doctrine->getManager(); // $em=$this->getDoctrine()->getManager();
@@ -97,13 +98,13 @@ class GallerieController extends AbstractController
 
 
     #[Route('/editGallerie/{id}', name: 'app_edit_gallerie')]
-    public function editGallerie ($id, GallerieRepository  $repository, Request $request,ManagerRegistry $doctrine, SluggerInterface $slugger )
+    public function editGallerie($id, GallerieRepository  $repository, Request $request, ManagerRegistry $doctrine, SluggerInterface $slugger)
     {
-        $gallerie= $repository->find($id);
-        $form= $this->createForm(GallerieFormType::class,$gallerie, );
-        $form->handleRequest($request) ;
+        $gallerie = $repository->find($id);
+        $form = $this->createForm(GallerieFormType::class, $gallerie,);
+        $form->handleRequest($request);
 
-        if($form->isSubmitted()){
+        if ($form->isSubmitted()) {
             $photo = $form->get('photo')->getData();
 
             // this condition is needed because the 'brochure' field is not required
@@ -112,7 +113,7 @@ class GallerieController extends AbstractController
                 $originalFilename = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$photo->guessExtension();
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $photo->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {
@@ -143,7 +144,14 @@ class GallerieController extends AbstractController
             $em->flush();
             return $this->redirectToRoute("app_my_galleries");
         }
-        return $this->renderForm("Gallerie/edit_gallerie.html.twig", array("gallerieForm" => $form, "gallerie"=>$gallerie));
+        return $this->renderForm("Gallerie/edit_gallerie.html.twig", array("gallerieForm" => $form, "gallerie" => $gallerie));
     }
 
+    #[Route('/test', name: 'app_test')]
+    public function reservation(ReservationRepository $reservationRepository)
+    {
+
+        $current = $reservationRepository->find(1);
+        return $this->render("Gallerie/reservation.html.twig", array("current" => $current));
+    }
 }
