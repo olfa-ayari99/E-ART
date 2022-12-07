@@ -1,0 +1,54 @@
+{% extends 'base/base_admin.html.twig' %}
+
+
+
+{% block body %}
+
+    <table class="table">
+
+
+        <thead style="background: #1C2260">
+        <tr>
+            <th scope="col" style="color: white">#</th>
+            <th scope="col" style="width: 300px;color: white">Date Debut</th>
+            <th scope="col" style="width: 120px;color: white">Date Fin</th>
+            <th scope="col" style="text-align: center;width: 350px;color: white">Prix Total</th>
+            <th scope="col" style="text-align: center;width: 350px;color: white">Options</th>
+        </tr>
+        </thead>
+
+
+        <tbody>
+
+        {% for key, r in listReservations %}
+            <tr>
+                <th scope="row">{{ key+1 }}</th>
+                <td>{{ r.dateDebut|date("d/m/Y") }}</td>
+                <td>{{ r.dateFin|date("d/m/Y") }}</td>
+
+                <td style="text-align: center"> {{ r.prix }} Dt</td>
+
+
+                <td >
+                    <div style="text-align: center; width:100%;">
+                        <div class="option-holder">
+                            <h6>
+                                <a href="{{path('app_delete_reservation_admin',{'id': r.id})}}" >
+                                    <i class="fas fa-delete"></i>
+                                    Supprimer
+                                </a>
+
+
+                            </h6>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+    {{ knp_pagination_render(listReservations) }}
+{% endblock %}

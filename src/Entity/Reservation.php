@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ReservationRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,11 +24,46 @@ class Reservation
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateFin = null;
 
-    #[ORM\OneToOne(inversedBy: 'gallerie_id', targetEntity: Gallerie::class)]
-    private  $gallerie;
+    #[ORM\ManyToOne(inversedBy: 'galleries', cascade: ["persist"])]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
+    private ?Gallerie $gallerie = null;
 
-    #[ORM\OneToOne(inversedBy: 'user_id', targetEntity: User::class)]
-    private  $user;
+    #[ORM\ManyToOne(inversedBy: 'user', cascade: ["persist"])]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
+    private ?User $user = null;
+
+    /**
+     * @return Gallerie|null
+     */
+    public function getGallerie(): ?Gallerie
+    {
+        return $this->gallerie;
+    }
+
+    /**
+     * @param Gallerie|null $gallerie
+     */
+    public function setGallerie(?Gallerie $gallerie): void
+    {
+        $this->gallerie = $gallerie;
+    }
+
+    /**
+     * @return User|null
+     */
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User|null $user
+     */
+    public function setUser(?User $user): void
+    {
+        $this->user = $user;
+    }
+
 
     public function getId(): ?int
     {

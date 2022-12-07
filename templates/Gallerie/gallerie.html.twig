@@ -33,7 +33,7 @@
 							</div>
 
 							<div class="option-holder" style="float:right;">
-								<h4><a href="collection-detail.html">Mes réservations</a></h4>
+								<h4><a href="{{path('app_list_reservation')}}">Mes réservations</a></h4>
 							</div>
 
 							<div class="option-holder" style="margin:0 auto;">
@@ -54,7 +54,7 @@
 							<h4>
 								<a href="{{ path('app_detail_gallerie', {'id': g.id} ) }}">{{g.adresse}}</a>
 							</h4>
-							<h3>
+							<h3 class="text-primary">
 								{{g.prix}}
 								dt/jour
 							</h3>
@@ -67,8 +67,10 @@
 				{% endfor %}
 
 			</div>
+			<div>
+				<h2>{{ knp_pagination_render(listGalleries) }}</h2>
+			</div>
 		</div>
 	</section>
 
-	{{ knp_pagination_render(listGalleries) }}
 {% endblock %}

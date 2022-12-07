@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\GallerieRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -33,16 +34,22 @@ class Gallerie
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
+    #[ORM\OneToMany(mappedBy: 'gallerie', targetEntity: Gallerie::class)]
+    private Collection $galleries;
+
 
     #[ORM\ManyToOne(inversedBy: 'galleries', cascade: ["persist"])]
     #[ORM\JoinColumn(onDelete: "CASCADE")]
     private ?User $user = null;
+
+
 
     /**
      * @param int|null $id
      */
     public function __construct()
     {
+
     }
 
 

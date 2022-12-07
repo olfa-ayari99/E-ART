@@ -31,6 +31,9 @@ class User
 
     #[ORM\OneToMany(mappedBy: 'gallerie', targetEntity: Gallerie::class)]
     private Collection $galleries;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Gallerie::class)]
+    private Collection $users;
+
 
 
 

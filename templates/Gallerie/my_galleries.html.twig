@@ -147,7 +147,11 @@
 
                                 <div class="option-delete" style="float:right; ">
                                     <h6>
-                                        <a onclick="confirmDelete({{ g.id }})" ><i class="fas fa-delete"></i> Supprimer</a>
+                                        <a onclick="confirmDelete({{ g.id }})" >
+                                            <i class="fas fa-delete"></i>
+                                            Supprimer
+                                        </a>
+
 
                                     </h6>
                                 </div>
@@ -170,14 +174,14 @@
 
     <div id="id01" class="modal">
         <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
-        <div class="modal-content" action="/action_page.php">
+        <div class="modal-content" >
             <div class="container">
                 <h3>Suppression de gallerie</h3>
                 <h5>Voulez vous vraiment supprimer cette gallerie ?</h5>
 
                 <div class="clearfix">
                     <a type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Abondonner</a>
-                    <a id="btn-delete" href="aaa" type="button" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Confirmer</a>
+                    <a id="btn-delete" href="" type="button" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Confirmer</a>
                 </div>
             </div>
         </div>
@@ -186,9 +190,9 @@
     <script>
 
         function confirmDelete(id){
+
             document.getElementById('id01').style.display='block';
             document.getElementById('btn-delete').href = 'deleteGallerie/'+id;
-            console.log( document.getElementById('btn-delete').href)
         }
         // Get the modal
         var modal = document.getElementById('id01');

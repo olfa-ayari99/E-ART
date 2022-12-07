@@ -20,6 +20,34 @@
     </div>
 {% endblock %}
 
+    {% block downloadPDF %}
+
+        <div class="container-fluid page__heading-container">
+            <div class="page__heading d-flex align-items-center">
+                <div class="flex">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item">
+                                <a href="#">
+                                    <i class="material-icons icon-20pt">home</i>
+                                </a>
+                            </li>
+
+                            <li class="breadcrumb-item">
+                                <a href="{{path('app_pdf')}}">
+                                    <i class="fas fa-file-download" style="margin-left: 1000px; font-size: 30px"></i>
+                                    Download
+                                </a>
+                            </li>
+                        </ol>
+                    </nav>
+
+                </div>
+
+            </div>
+        </div>
+    {% endblock %}
+
 
 
 {% block body %}
@@ -53,7 +81,7 @@
 
                         <div class="option-delete" style="margin:0 auto; ">
                             <h6>
-                                <a onclick="confirmDelete({{ g.id }})" ><i class="fas fa-delete" ></i> Supprimer</a>
+                                <a href="{{path('app_delete_gallerie_admin',{'id': g.id})}}"><i class="fas fa-delete" ></i> Supprimer</a>
 
                             </h6>
                         </div>
