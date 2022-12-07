@@ -1,0 +1,9 @@
+{% extends "base/base_admin.html.twig" %}
+
+{% block body %}
+    <h1>Edit Oeuvre</h1>
+
+    {{ include('oeuvre/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a href="{{ path('app_oeuvre_index') }}" class="btn btn-primary ">Retouner à la liste</a>
+{% endblock %}

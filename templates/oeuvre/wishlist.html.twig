@@ -1,0 +1,55 @@
+{% extends "base/base.html.twig" %} 
+{% block body %}
+<section class="content-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Oeuvre</th>
+              <th scope="col">Prix</th>
+              <th scope="col">Description</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for key ,item in oeuvres %}
+            <tr>
+              <td>{{ key +1 }}</td>
+              <td>{{ item.item.title }}</td>
+              <td>{{ item.item.price }} TND</td>
+              <td>{{ item.item.description }}</td>
+              <td>
+                <a href="#" class="btn btn-danger btn-rounded" onclick="Swal.fire({
+                    title: 'Etes-vous sur  ?',
+                    icon: 'question',
+                    showDenyButton: true,
+                    confirmButtonText: 'Supprimer',
+                    denyButtonText: `Annuler`,
+                  }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                      Swal.fire('Supprimé!', '', 'success').then(()=>{
+                        window.location.href = `{{ path('app_oeuvre_wishlist_delete', {'id': item.item.id}) }}`
+                      })
+                      
+                    } else if (result.isDenied) {
+                      Swal.fire('Annulé', '', 'warning')
+                    }
+                  })">
+                  <i class="fa-solid fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  {#     #}
+</section>
+{% endblock body %}

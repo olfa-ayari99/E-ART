@@ -1,0 +1,167 @@
+
+<section class="book-area ptb-100">
+  <div class="container">
+    <div class="section-title">
+      <h2>Featured Book</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+    </div>
+
+    <div class="book-slider owl-carousel owl-theme owl-loaded owl-drag">
+      <div class="owl-stage-outer">
+        <div
+          class="owl-stage"
+          style="
+            transform: translate3d(-2549px, 0px, 0px);
+            transition: all 0.5s ease 0s;
+            width: 6374px;
+          "
+        >
+          {% for key , oeuvre in oeuvres %}
+          <div
+            class="owl-item cloned"
+            style="width: 298.667px; margin-right: 20px"
+          >
+            <div class="book-item">
+              <div class="image">
+                <a href="#">
+                  <img src="/uploads/oeuvres/{{ oeuvre.image }}" alt="image" />
+                </a>
+
+                <div class="icon">
+                  <a
+                    href="#"
+                    data-bs-toggle="modal"
+                    data-bs-target="#productsQuickView{{ key }}"
+                  >
+                    <i class="las la-eye"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="owl-nav">
+        <button type="button" role="presentation" class="owl-prev">
+          <i class="las la-angle-left"></i></button
+        ><button type="button" role="presentation" class="owl-next">
+          <i class="las la-angle-right"></i>
+        </button>
+      </div>
+      <div class="owl-dots disabled"></div>
+    </div>
+  </div>
+</section>
+
+{% for key , oeuvre in oeuvres %}
+<div
+  class="modal fade productsQuickView"
+  id="productsQuickView{{ key }}"
+  tabindex="-1"
+  role="dialog"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <button
+        type="button"
+        class="close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true"><i class="las la-times"></i></span>
+      </button>
+
+      <div class="row align-items-center">
+        <div class="col-lg-6 col-md-6">
+          <div class="products-image">
+            <img src="/uploads/oeuvres/{{ oeuvre.image }}" alt="image" />
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+          <div class="product-content">
+            <h3>{{ oeuvre.title }}</h3>
+            <div class="price">
+              <span class="new-price">{{ oeuvre.price }} TND</span>
+              <span class="old-price">{{ oeuvre.price - 134.9 }} TND</span>
+            </div>
+            <div class="product-review">
+              <div class="rating">
+                <i class="las la-star"></i>
+                <i class="las la-star"></i>
+                <i class="las la-star"></i>
+                <i class="las la-star"></i>
+                <i class="las la-star"></i>
+              </div>
+              <a href="#" class="rating-count">5 Revues</a>
+            </div>
+            <p>{{ oeuvre.description }}</p>
+            <form action="{{ path('add_to_cart') }}">
+              <div class="product-add-to-cart">
+                <div class="input-counter">
+                  <span class="minus-btn">
+                    <i class="las la-minus"></i>
+                  </span>
+                  <input type="text" min="1" value="1" name="qty" />
+
+                  <span class="plus-btn">
+                    <i class="las la-plus"></i>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  name="oeuvre"
+                  hidden
+                  value="{{ oeuvre.id }}"
+                />
+                <button type="submit" class="default-btn">
+                  Ajouter au panier
+                  <span></span>
+                </button>
+              </div>
+            </form>
+
+            <div class="buy-checkbox-btn">
+              <div class="item">
+                <a href="#" class="btn btn-light">Acheter maintenant</a>
+              </div>
+            </div>
+
+            <div class="products-share">
+              <ul class="social">
+                <li><span>Share:</span></li>
+                <li>
+                  <a href="#" class="facebook" target="_blank"
+                    ><i class="lab la-facebook-f"></i
+                  ></a>
+                </li>
+                <li>
+                  <a href="#" class="twitter" target="_blank"
+                    ><i class="lab la-twitter"></i
+                  ></a>
+                </li>
+                <li>
+                  <a href="#" class="linkedin" target="_blank"
+                    ><i class="lab la-linkedin-in"></i
+                  ></a>
+                </li>
+                <li>
+                  <a href="#" class="instagram" target="_blank"
+                    ><i class="lab la-instagram"></i
+                  ></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}

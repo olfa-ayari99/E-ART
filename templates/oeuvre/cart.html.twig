@@ -1,0 +1,60 @@
+{% extends "base/base.html.twig" %} 
+{% block body %}
+{% for error in errors %}
+    <li>{{ error.message }}</li>
+{% endfor %}
+<section class="content-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Oeuvre</th>
+              <th scope="col">Prix</th>
+              <th scope="col">Quantité</th>
+              <th scope="col">Total</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for key ,item in cartItems %}
+            <tr>
+              <td>{{ key +1 }}</td>
+              <td>{{ item.oeuvre.title }}</td>
+              <td>{{ item.oeuvre.price }} TND</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.oeuvre.price * item.quantity }} TND</td>
+              <td>
+                <a href="#" class="btn btn-danger btn-rounded" onclick="Swal.fire({
+                    title: 'Etes-vous sur  ?',
+                    icon: 'question',
+                    showDenyButton: true,
+                    confirmButtonText: 'Supprimer',
+                    denyButtonText: `Annuler`,
+                  }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                      Swal.fire('Supprimé!', '', 'success').then(()=>{
+                        window.location.href = `{{ path('cart_delete', {'id': item.oeuvre.id}) }}`
+                      })
+                      
+                    } else if (result.isDenied) {
+                      Swal.fire('Annulé', '', 'warning')
+                    }
+                  })">
+                  <i class="fa-solid fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <a href="{{ path('app_commande_new') }}" class="btn btn-primary btn-rounded" style="float:right;margin-right:50px;">Passer la commande</a>
+</section>
+{% endblock body %}
