@@ -6,18 +6,28 @@ use App\Repository\OeuvreRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+<<<<<<< HEAD
 use App\Repository\EvenementRepository;
+=======
+>>>>>>> bfaa3b66a53d775195d534f4717f37a673aaddb7
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class IndexController extends AbstractController
 {
     #[Route('/', name: 'app_index')]
+<<<<<<< HEAD
     public function index(OeuvreRepository $oeuvreRepository , EvenementRepository $evenementRepository): Response
+=======
+    public function index(OeuvreRepository $oeuvreRepository): Response
+>>>>>>> bfaa3b66a53d775195d534f4717f37a673aaddb7
     {
 
         return $this->render('index/index.html.twig', [
             'oeuvres' => $oeuvreRepository->findBy([] , [] , 3),
+<<<<<<< HEAD
             'events' => $evenementRepository->findBy( [] , [] , 3),
+=======
+>>>>>>> bfaa3b66a53d775195d534f4717f37a673aaddb7
         ]);
     }
 
