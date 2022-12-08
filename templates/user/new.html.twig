@@ -1,0 +1,14 @@
+{% extends 'base/base_admin.html.twig' %}
+
+
+{% block title %}Home Repair - Dashboard{% endblock %}
+
+{% block body %}
+<center>
+    <h1>Create new User</h1>
+
+    {{ include('user/_form.html.twig', {'button_label': 'Ajouter'}) }}
+
+    <a href="{{ path('app_user_index') }}">back to list</a>
+</center>
+{% endblock %}
