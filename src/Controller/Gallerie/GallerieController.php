@@ -38,7 +38,7 @@ class GallerieController extends AbstractController
     public function __construct()
     {
         $this->session = new Session();
-        $this->session->start();
+
     }
 
 
@@ -115,6 +115,7 @@ class GallerieController extends AbstractController
     public function detailGalleries($id, GallerieRepository $repository, Request $request, ManagerRegistry $doctrine, UserRepository $userRepository)
     {
         $gallerie = $repository->find($id);
+
         $this->session->set('id', $id);
         return $this->render("Gallerie/detail_gallerie.html.twig", array("gallerie" => $gallerie));
     }

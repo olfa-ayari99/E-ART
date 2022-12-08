@@ -174,7 +174,7 @@
 							</div>
 							<div class="col-6">
 								<div class="btn-reservation-holder">
-									<a onclick="OpenModal({{ gallerie.id }}, {{ gallerie.prix }})" class="btn-reservation">Réserver</a>
+									<a onclick="OpenModal({{ gallerie.id }})" class="btn-reservation">Réserver</a>
 								</div>
 							</div>
 						</div>
@@ -215,17 +215,12 @@
 
 		var dateDebut = '';
 		var dateFin = '';
-
-		function OpenModal(id, prix){
+		function OpenModal(id){
 
 			document.getElementById('id02').style.display='block';
 			document.getElementById('recap-reservation').innerHTML = 'Date début : ' + dateDebut + '&emsp;&emsp;' + 'Date fin :'+dateFin;
-			var diff = new Date(Date.parse(dateFin)).getDay() - new Date(Date.parse(dateDebut)).getDay();
-			var total = diff*prix;
-
-			document.getElementById('btn-confirm').href = '/reservation/'+id+'/'+dateDebut+'/'+dateFin; //=> /reservation/3/2022-12-01/2022-12-03
+			document.getElementById('btn-confirm').href = '/reservation/'+id+'/'+dateDebut+'/'+dateFin;
 		}
-
 		document.addEventListener('DOMContentLoaded', () => {
 		var calendarEl = document.getElementById('calendar-holder');
 		var calendar = new FullCalendar.Calendar(calendarEl, {

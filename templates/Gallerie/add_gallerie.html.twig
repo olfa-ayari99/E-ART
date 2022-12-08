@@ -19,27 +19,37 @@
 			</div>
 
 			<div class="row justify-content-center">
-				{{ form_start(gallerieForm) }}
-
+				{{ form_start(gallerieForm,{'attr': {'novalidate': 'novalidate'}} ) }}
 				<div class="contact-form">
 
 					<div class="mb-3">
-						{{ form_row(gallerieForm.prix) }}
+						{{ form_label(gallerieForm.prix) }}
+						{{ form_widget(gallerieForm.prix) }}
+						{{ form_errors(gallerieForm.prix) }}
 					</div>
 
 					<div class="mb-3">
-						{{ form_row(gallerieForm.adresse) }}
+						{{ form_label(gallerieForm.adresse) }}
+						{{ form_widget(gallerieForm.adresse) }}
+						{{ form_errors(gallerieForm.adresse) }}
 					</div>
 
 
 
 					<div class="mb-3">
-						{{ form_row(gallerieForm.description) }}
+						{{ form_label(gallerieForm.description) }}
+						{{ form_widget(gallerieForm.description) }}
+						{{ form_errors(gallerieForm.description) }}
+					</div>
+
+					<div class="mb-3">
+						{{ form_label(gallerieForm.photo) }}
+						{{ form_widget(gallerieForm.photo) }}
+						{{ form_errors(gallerieForm.photo) }}
 					</div>
 
 					<div class="mb-3">
 						{{ form_row(gallerieForm.submit) }}
-
 					</div>
 
 

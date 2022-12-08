@@ -21,7 +21,7 @@ class GallerieFormType extends AbstractType
             ->add('prix', NumberType::class)
             ->add('description', TextType::class)
             ->add('photo', FileType::class, [
-                'label' => 'Votre image de gallerie (Des fichiers images uniquement)',
+                'label' => 'Des fichiers images uniquement    ',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,

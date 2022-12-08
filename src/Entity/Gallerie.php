@@ -32,8 +32,11 @@ class Gallerie
     #[ORM\Column(length: 500, nullable: true)]
     private ?string $description = null;
 
+
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
+
+
     #[ORM\OneToMany(mappedBy: 'gallerie', targetEntity: Gallerie::class)]
     private Collection $galleries;
 
