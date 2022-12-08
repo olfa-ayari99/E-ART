@@ -66,7 +66,7 @@ class CommentaireController extends AbstractController
             $em = $doctrine->getManager();
             $em->persist($commentaire);
             $em->flush();
-            return $this->redirectToRoute('app_add_commentaire');
+            return $this->redirectToRoute('app_send_mail');
         }
         return $this->renderForm("Post/add_commentaire.html.twig", array("commentaireForm" => $form, "commentaire"=>$commentaire));
     }
@@ -104,7 +104,7 @@ class CommentaireController extends AbstractController
     /**
      * @return RedirectResponse
      */
-    #[Route('/sendMail', name: 'app_send_app')]
+    #[Route('/sendMail', name: 'app_send_mail')]
     public function sendMail()
     {
 
@@ -115,7 +115,7 @@ class CommentaireController extends AbstractController
             ->html('<p>Ceci est mon message en HTML</p>')
         ;
         $mail->getHeaders()->addTextHeader('X-Auto-Response-Suppress', 'OOF, DR, RN, NRN, AutoReply');
-        $transport = Transport::fromDsn('gmail+smtp://mahmoud.lakhal@esprit.tn:E204JMT4443@default?verify_peer=0');
+        $transport = Transport::fromDsn('gmail+smtp://mahmoud.lakhal@esprit.tn:motdepasse@default?verify_peer=0');
         $mailer = new Mailer($transport);
         try{
             $mailer->send($mail);
@@ -124,6 +124,6 @@ class CommentaireController extends AbstractController
         };
 
 
-        return $this->redirectToRoute("app_add_commentaire");
+        return $this->redirectToRoute('app_add_commentaire');
     }
 }
