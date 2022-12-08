@@ -1,0 +1,90 @@
+{{ form_start(form) }}
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-lg-8 card-form__body card-body">
+    <div class="form-group">
+      <label for="#">Nom societe</label>
+      {{ form_widget(form.nom_societe , {'attr' : {'class' : 'form-control'}})
+      }}
+      <span style="color:red;"> {% for error in errors %}
+        {% if error.propertyPath == "nom_societe" %}
+          * {{ error.message }}
+        {% endif %}
+      {% endfor %}</span>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-lg-8 card-form__body card-body">
+      <div class="form-group">
+        <label for="#">Type sponsoring</label>
+        {{ form_widget(form.type_sponsor , {'attr' : {'class' : 'form-control'}})
+        }}
+        <span style="color:red;"> {% for error in errors %}
+          {% if error.propertyPath == "type=_sponsor" %}
+            * {{ error.message }}
+          {% endif %}
+        {% endfor %}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-lg-8 card-form__body card-body">
+      <div class="form-group">
+        <label for="#">Téléphone</label>
+        {{ form_widget(form.tel , {'attr' : {'class' : 'form-control'}})
+        }}
+        <span style="color:red;"> {% for error in errors %}
+          {% if error.propertyPath == "tel" %}
+            * {{ error.message }}
+          {% endif %}
+        {% endfor %}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-lg-8 card-form__body card-body">
+      <div class="form-group">
+        <label for="#">Montant</label>
+        {{ form_widget(form.montant , {'attr' : {'class' : 'form-control'}})
+        }}
+        <span style="color:red;"> {% for error in errors %}
+          {% if error.propertyPath == "montant" %}
+            * {{ error.message }}
+          {% endif %}
+        {% endfor %}</span>
+      </div>
+    </div>
+  </div>
+
+<center>
+  <button
+    type="button"
+    class="btn btn-success"
+    onclick="Swal.fire({
+          title: 'Etes-vous sur ?',
+          icon: 'question',
+          showDenyButton: true,
+          confirmButtonText: 'Envoyer',
+          denyButtonText: `Annuler`,
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            Swal.fire('Sauvegardé!', '', 'success').then(()=>{
+                document.getElementsByName('sponsor')[0].submit()
+            })
+          } else if (result.isDenied) {
+            Swal.fire('Annulé', '', 'warning')
+          }
+        })"
+  >
+    {{ button_label|default('Envoyer') }}
+  </button>
+</center>
+{{ form_end(form) }}

@@ -1,0 +1,31 @@
+<div class="container content-section">
+  <div class="row">
+    <div class="col-md-12">
+      {{ form_start(form) }}
+      {{ form_row(form._token) }}
+      <div class="row">
+        <div class="col-lg-6 col-md-12">
+          <div class="form-group">
+            {{ form_widget(form.adresse_livraison,{'attr' : {'class' : 'form-control' , 'placeholder' : 'Adesse de livraison'}}) }}
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-12">
+          <div class="form-group">
+            {{ form_widget(form.tel,{'attr' : {'class' : 'form-control' , 'placeholder' : 'Numéro de télèphone'}}) }}
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <center>
+        <button class="btn btn-primary">
+        {{ button_label|default('Envoyer') }}
+      </button>
+      </center>
+      
+      {{ form_end(form, { render_rest: false }) }}
+    </div>
+  </div>
+</div>

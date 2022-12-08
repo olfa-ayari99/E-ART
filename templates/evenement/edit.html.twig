@@ -1,0 +1,10 @@
+{% extends "base/base_admin.html.twig" %}
+
+{% block body %}
+    <h1>Edit Evenement</h1>
+
+    {{ include('evenement/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a href="{{ path('app_evenement_index') }}" class="btn btn-primary">Retourner à la liste</a>
+
+{% endblock %}

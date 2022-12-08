@@ -1,0 +1,69 @@
+{{ form_start(form) }}
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-lg-8 card-form__body card-body">
+    <div class="form-group">
+      <label for="#">Titre</label>
+      {{ form_widget(form.title , {'attr' : {'class' : 'form-control'}}) }}
+    </div>
+  </div>    
+</div>
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-lg-8 card-form__body card-body">
+      <div class="form-group">
+        <label for="#">Description</label>
+        {{ form_widget(form.description , {'attr' : {'class' : 'form-control'}}) }}
+      </div>
+    </div>    
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-lg-8 card-form__body card-body">
+      <div class="form-group">
+        <label for="#">Price</label>
+        {{ form_widget(form.price , {'attr' : {'class' : 'form-control' , 'type' : 'number'}}) }}
+      </div>
+    </div>    
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-lg-8 card-form__body card-body">
+      <div class="form-group">
+        <label for="#">Quantité</label>
+        {{ form_widget(form.quantity , {'attr' : {'class' : 'form-control' , 'type' : 'number'}}) }}
+      </div>
+    </div>    
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-lg-8 card-form__body card-body">
+      <div class="form-group">
+        <label for="#">Image</label>
+        {{ form_widget(form.image , {'attr' : {'class' : 'form-control'}}) }}
+      </div>
+
+    </div>    
+  </div>
+  <center>
+    <button type="button" class="btn btn-success " onclick="Swal.fire({
+        title: 'Etes-vous sur ?',
+        icon: 'question',
+        showDenyButton: true,
+        confirmButtonText: 'Envoyer',
+        denyButtonText: `Annuler`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire('Sauvegardé!', '', 'success')
+          document.getElementsByName('oeuvre1')[0].submit()
+        } else if (result.isDenied) {
+          Swal.fire('Annulé', '', 'warning')
+        }
+      })">{{ button_label|default('Envoyer') }}</button>
+</center>
+{{ form_end(form) }}

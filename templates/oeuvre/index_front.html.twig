@@ -1,0 +1,71 @@
+{% extends "base/base.html.twig" %} 
+{% block body %}
+<section
+  class="content-section"
+  data-background="#fffbf7"
+  style="background: rgb(255, 251, 247)"
+>
+  <div class="container">
+    <div class="row justify-content-center">
+   {% for oeuvre in oeuvres %}
+   <div class="col-lg-4 col-md-6">
+    <div
+      class="exhibition-box is-inview"
+      data-scroll=""
+      data-scroll-speed="-1"
+      style="
+        transform: matrix3d(
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          -6.05,
+          0,
+          1
+        );
+      "
+    >
+      <figure>
+        <a href="exhibition-detail.html"
+          ><img src="/uploads/oeuvres/{{ oeuvre.image }}" alt="Image" class="img"
+        /></a>
+        <div class="info">
+          <figure class="i">
+            <img src="/images/icon-info.png" alt="Image" />
+          </figure>
+          <span>50% off exhibitions</span>
+        </div>
+        <!-- end info -->
+      </figure>
+      <div class="content-box">
+        <h4>
+          <a href="exhibition-detail.html"
+            >{{ oeuvre.title }}</a
+          >
+        </h4>
+        <p>{{ oeuvre.price }} TND</p>
+      </div>
+      <!-- end content-box -->
+    </div>
+    <form action="{{ path('add_to_cart') }}" method="GET">
+      <input type="text" name="oeuvre" hidden value="{{ oeuvre.id }}">
+      <input type="number" name="qty" class="form-control" style="height: 60px; width: 90px;">
+      <button class="btn btn-primary"> Ajouter au panier</button>
+    </form>
+  </div>
+   {% endfor %}
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end container -->
+</section>
+{% endblock body %}

@@ -1,0 +1,29 @@
+{{ form_start(form) }}
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-lg-8 card-form__body card-body">
+    <div class="form-group">
+      <label for="#">Libelle</label>
+      {{ form_widget(form.libelle , {'attr' : {'class' : 'form-control'}}) }}
+    </div>
+  </div>    
+</div>
+
+  <center>
+    <button type="button" class="btn btn-success " onclick="Swal.fire({
+        title: 'Etes-vous sur ?',
+        icon: 'question',
+        showDenyButton: true,
+        confirmButtonText: 'Envoyer',
+        denyButtonText: `Annuler`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire('Sauvegardé!', '', 'success')
+          document.getElementsByName('type_evenement')[0].submit()
+        } else if (result.isDenied) {
+          Swal.fire('Annulé', '', 'warning')
+        }
+      })">{{ button_label|default('Envoyer') }}</button>
+</center>
+{{ form_end(form) }}
