@@ -44,6 +44,9 @@ class Sponsor
     #[ORM\ManyToMany(targetEntity: Evenement::class, mappedBy: 'sponsor')]
     private Collection $evenements;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $email = null;
+
     public function __construct()
     {
         $this->evenements = new ArrayCollection();
@@ -132,5 +135,17 @@ class Sponsor
     public function __toString()
     {
         return $this->nom_societe;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
     }
 }

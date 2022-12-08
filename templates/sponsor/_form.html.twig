@@ -16,6 +16,22 @@
 </div>
 
 <div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-lg-8 card-form__body card-body">
+    <div class="form-group">
+      <label for="#">E-mail</label>
+      {{ form_widget(form.email , {'attr' : {'class' : 'form-control'}})
+      }}
+      <span style="color:red;"> {% for error in errors %}
+        {% if error.propertyPath == "email" %}
+          * {{ error.message }}
+        {% endif %}
+      {% endfor %}</span>
+    </div>
+  </div>
+</div>
+
+<div class="row">
     <div class="col-md-2"></div>
     <div class="col-lg-8 card-form__body card-body">
       <div class="form-group">

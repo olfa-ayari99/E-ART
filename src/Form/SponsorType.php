@@ -15,6 +15,7 @@ class SponsorType extends AbstractType
             ->add('nom_societe')
             ->add('type_sponsor')
             ->add('tel')
+            ->add('email')
             ->add('montant')
         ;
     }

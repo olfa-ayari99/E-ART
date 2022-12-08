@@ -23,7 +23,7 @@ class SponsorController extends AbstractController
     }
 
     #[Route('/new', name: 'app_sponsor_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, SponsorRepository $sponsorRepository , ValidatorInterface $validator): Response
+    public function new(Request $request, SponsorRepository $sponsorRepository , ValidatorInterface $validator, \Swift_Mailer $mailer): Response
     {
         $sponsor = new Sponsor();
         $form = $this->createForm(SponsorType::class, $sponsor);
@@ -42,7 +42,18 @@ class SponsorController extends AbstractController
                     'errors' => $errors
                 ]);
             }
-            $sponsorRepository->save($sponsor, true);
+            $message = (new \Swift_Message('Hello Email'))
+            ->setFrom('benabdallah.eya@esprit.tn')
+            ->setTo( $sponsor->getEmail() )
+            ->setBody(
+                "<p>Merci d'avoir sponsorisé cette evenement</p> ",
+                'text/html'
+                )
+                
+                ;
+                
+                $mailer->send($message);
+                $sponsorRepository->save($sponsor, true);   
             $this->addFlash('success_message', 'Sponsor ajouté avec succés');
             return $this->redirectToRoute('app_sponsor_index', [], Response::HTTP_SEE_OTHER);
         }
