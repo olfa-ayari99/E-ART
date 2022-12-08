@@ -32,34 +32,42 @@
             <div class="card-heading"></div>
             <div class="card-body">
                 <h2 class="title">Registration Info</h2>
-                <form method="POST">
+                {{ form_start(registrationForm) }}
                     <div class="input-group">
-                        <input class="input--style-3" type="text" placeholder="Nom" value="nom">
+                        <label class="input--style-3" >
+                        {{ form_label(registrationForm.nom, 'Nom') }}
+                        {{ form_widget(registrationForm.nom, { 'attr': {'class':'input--style-3' } }) }}
                     </div>
                     <div class="input-group">
-                        <input class="input--style-3 " type="text" placeholder="Prenom" name='prenom'>
+                        <label class="input--style-3" >
+                            {{ form_label(registrationForm.prenom, 'Prenom') }}
+                            {{ form_widget(registrationForm.prenom, { 'attr': {'class':'input--style-3' } }) }}
 
                     </div>
                     <div class="input-group">
-                        <div class="rs-select2 js-select-simple select--no-search">
-                            <select name="roles" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
-                                <option disabled="disabled" selected="selected">Roles</option>
-                                <option>Artist</option>
-                                <option>Client</option>
-                                <option>Bailleur</option>
-                            </select><div class="select-dropdown"></div>
-                        </div>
+
+
+                            <label class='input--style-3' >
+                                {{ form_label(registrationForm.roles, 'Roles') }}
+                                {{ form_widget(registrationForm.roles, { 'attr': {'class':'input--style-3' } }) }}
+
+
                     </div>
                     <div class="input-group">
-                        <input class="input--style-3" type="email" placeholder="Email" name='email'>
+                        <label class="input--style-3" >
+                            {{ form_label(registrationForm.email, 'Email') }}
+                            {{ form_widget(registrationForm.email, { 'attr': {'class':'input--style-3' } }) }}
                     </div>
                     <div class="input-group">
-                        <input class="input--style-3" type="text" placeholder="Password" name='password'>
+                        <label class="input--style-3" >
+                            {{ form_label(registrationForm.plainPassword, 'Password') }}
+                            {{ form_widget(registrationForm.plainPassword, { 'attr': {'class':'input--style-3' } }) }}
                     </div>
                     <div class="p-t-10">
-                        <button class="btn btn--pill btn--green" type="submit">Submit</button>
+
+                        {{ form_widget(registrationForm.submit,{ 'attr': {'class':'btn btn--pill btn--green' } }) }}
                     </div>
-                </form>
+                {{ form_end(registrationForm) }}
             </div>
         </div>
     </div>
