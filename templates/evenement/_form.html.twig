@@ -1,0 +1,106 @@
+{{ form_start(form) }}
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-lg-8 card-form__body card-body">
+    <div class="form-group">
+      <label for="#">Titre</label>
+      {{ form_widget(form.titre , {'attr' : {'class' : 'form-control'}})
+      }}
+      <span style="color:red;"> {% for error in errors %}
+        {% if error.propertyPath == "titre" %}
+          * {{ error.message }}
+        {% endif %}
+      {% endfor %}</span>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-lg-8 card-form__body card-body">
+      <div class="form-group">
+        <label for="#">Date de début</label>
+        {{ form_widget(form.date_debut , {'attr' : {'class' : 'form-control'}})
+        }}
+        <span style="color:red;"> {% for error in errors %}
+          {% if error.propertyPath == "date_debut" %}
+            * {{ error.message }}
+          {% endif %}
+        {% endfor %}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-lg-8 card-form__body card-body">
+      <div class="form-group">
+        <label for="#">Date de fin</label>
+        {{ form_widget(form.date_fin , {'attr' : {'class' : 'form-control datepicker'}})
+        }}
+        <span style="color:red;"> {% for error in errors %}
+          {% if error.propertyPath == "date_fin" %}
+            * {{ error.message }}
+          {% endif %}
+        {% endfor %}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-lg-8 card-form__body card-body">
+      <div class="form-group">
+        <label for="#">Sponsors</label>
+        {{ form_widget(form.sponsor , {'attr' : {'class' : 'form-control'}})
+        }}
+        <span style="color:red;"> {% for error in errors %}
+          {% if error.propertyPath == "sponsor" %}
+            * {{ error.message }}
+          {% endif %}
+        {% endfor %}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-lg-8 card-form__body card-body">
+      <div class="form-group">
+        <label for="#">Type d'évenement</label>
+        {{ form_widget(form.TypeEvenement , {'attr' : {'class' : 'form-control'}})
+        }}
+        <span style="color:red;"> {% for error in errors %}
+          {% if error.propertyPath == "TypeEvenement" %}
+            * {{ error.message }}
+          {% endif %}
+        {% endfor %}</span>
+      </div>
+    </div>
+  </div>
+
+<center>
+  <button
+    type="button"
+    class="btn btn-success"
+    onclick="Swal.fire({
+          title: 'Etes-vous sur ?',
+          icon: 'question',
+          showDenyButton: true,
+          confirmButtonText: 'Envoyer',
+          denyButtonText: `Annuler`,
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            Swal.fire('Sauvegardé!', '', 'success').then(()=>{
+                document.getElementsByName('evenement')[0].submit()
+            })
+          } else if (result.isDenied) {
+            Swal.fire('Annulé', '', 'warning')
+          }
+        })"
+  >
+    {{ button_label|default('Envoyer') }}
+  </button>
+</center>
+{{ form_end(form) }}

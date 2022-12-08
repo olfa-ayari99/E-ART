@@ -1,0 +1,103 @@
+{% extends "base/base_admin.html.twig" %}
+
+{% block body %} {% for message in app.flashes('success_message') %}
+<div
+  class="alert alert-dismissible bg-success text-white border-0 fade show"
+  role="alert"
+>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">×</span>
+  </button>
+  <strong>Success - </strong> {{ message }}
+</div>
+{% endfor %}
+<h1>Liste des types d'évenement</h1>
+<div class="container">
+  <div class="row">
+    <div
+      class="table-responsive border-bottom"
+      data-toggle="lists"
+      data-lists-values='["js-lists-values-employee-name"]'
+    >
+      <div class="search-form search-form--light m-3">
+        <input
+          type="text"
+          class="form-control search"
+          placeholder="Rechercher..."
+        />
+        <button class="btn" type="button">
+          <i class="material-icons">search</i>
+        </button>
+      </div>
+
+      <table class="table mb-0 thead-border-top-0">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nom societe</th>
+            <th>Type sponsor</th>
+            <th>Téléphone</th>
+            <th>Montant</th>
+            <th>actions</th>
+          </tr>
+        </thead>
+        <tbody class="list" id="staff02">
+          <tr>
+            {% for sponsor in sponsors %}
+          </tr>
+
+          <tr>
+            <td>{{ sponsor.id }}</td>
+            <td>{{ sponsor.nomSociete }}</td>
+            <td>{{ sponsor.typeSponsor }}</td>
+            <td>{{ sponsor.tel }}</td>
+            <td>{{ sponsor.montant }}</td>
+            <td class="text-right">
+              <a
+                href="{{ path('app_sponsor_edit', { 'id': sponsor.id }) }}"
+                class="btn btn-success btn-rounded"
+                style="margin-bottom: 10px"
+              >
+                <i class="tiny material-icons">create</i>
+              </a>
+              <a
+                href="#"
+                class="btn btn-danger btn-rounded"
+                onclick="Swal.fire({
+                                title: 'Etes-vous sur  ?',
+                                icon: 'question',
+                                showDenyButton: true,
+                                confirmButtonText: 'Supprimer',
+                                denyButtonText: `Annuler`,
+                              }).then((result) => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                  Swal.fire('Supprimé!', '', 'success').then(()=>{
+                                    window.location.href = `{{
+                                        path('app_sponsor_delete', { 'id': sponsor.id })
+                                      }}`
+                                  })
+                                  
+                                } else if (result.isDenied) {
+                                  Swal.fire('Annulé', '', 'warning')
+                                }
+                              })"
+              >
+                <i class="tiny material-icons">close</i>
+              </a>
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="7">no records found</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<a href="{{ path('app_sponsor_new') }}" class="btn btn-primary btn-primary"
+  >Ajouter un sponsor</a
+>
+{% endblock %}
