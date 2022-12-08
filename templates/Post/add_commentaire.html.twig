@@ -1,0 +1,73 @@
+{% extends "base/base.html.twig" %}
+
+{% block body %}
+    <section class="content-section" data-background="#fffbf7">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center justify-content-center">
+                        <figure><img src="{{ asset("images/title-shape.png") }}" alt="Image"></figure>
+                        <h2 style="font-size: 50px"><i>Ajout d'un commentaire</i></h2>
+                        <figure><img src="{{ asset("images/ajout.png") }}" alt="Image" style="width: 100px;height: 80px"></figure>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                {{ form_start(commentaireForm) }}
+
+                <div class="contact-form">
+
+                    <div class="mb-3">
+                        {{ form_row(commentaireForm.comment) }}
+                    </div>
+
+
+
+
+                    <div class="mb-3"style="float:left;">
+
+
+                    <div class="mb-3" >
+                        {{ form_row(commentaireForm.submit) }}
+
+                    </div>
+
+                </div>
+
+                {{ form_end(commentaireForm) }}
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let base64String = "";
+
+        function imageUploaded() {
+            var file = document.querySelector(
+                'input[type=file]')['files'][0];
+
+            var reader = new FileReader();
+            console.log("next");
+
+            reader.onload = function () {
+                base64String = reader.result.replace("data:", "")
+                    .replace(/^.+,/, "");
+
+                imageBase64Stringsep = base64String;
+
+                // alert(imageBase64Stringsep);
+                console.log(base64String);
+            }
+            reader.readAsDataURL(file);
+        }
+
+        function displayString() {
+            console.log("Base64String about to be printed");
+            document.getElementById("demo").innerHTML = base64String;
+        }
+    </script>
+
+{% endblock %}

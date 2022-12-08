@@ -1,0 +1,92 @@
+
+
+{% extends "base/base.html.twig" %}
+
+
+{% block body %}
+
+    <section class="content-section" data-background="#fffbf7">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center justify-content-center">
+
+                        <figure><img src="{{ asset("images/title-shape.png") }}" alt="Image"></figure>
+                        <h2 style="font-size: 50px">{{post.titre}}</h2>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row align-items-center">
+                <div class="row" style="text-align: center">
+                    <div class="col-4">
+
+                        <div class="content">
+                            <h3>Sujet</h3>
+                            <h5 style="color: #0a58ca">{{ post.sujet }}</h5>
+                        </div>
+                    </div>
+                    <div class="col-4">
+
+                        <div class="content">
+                            <h3>Description</h3>
+
+                            <h6>{{ post.description }}</h6>
+                        </div>
+
+                    </div>
+
+                    <div class="col-4">
+                        <br><br><br>
+                        <div class="content">
+                            <a href="{{ path('app_add_commentaire', {'id': post.id})}}"> <img src="{{ asset("images/img.png") }}" alt="Image" style="width: 25px;height: 25px">
+                                <b style="color: springgreen">Ajouter commentaire</b></a>
+                        </div>
+                        <div >
+
+                            <a href="{{ path('app_my_commentaires')}}">
+                                <figure><img src="{{ asset("images/list.png") }}" alt="Image" style="width: 20px;height: 20px"><b style="color:springgreen">List Commentaire</b>
+                                </figure></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+    </section>
+
+    <script>
+        let base64String = "";
+
+        function imageUploaded() {
+            var file = document.querySelector(
+                'input[type=file]')['files'][0];
+
+            var reader = new FileReader();
+            console.log("next");
+
+            reader.onload = function () {
+                base64String = reader.result.replace("data:", "")
+                    .replace(/^.+,/, "");
+
+                imageBase64Stringsep = base64String;
+
+                // alert(imageBase64Stringsep);
+                console.log(base64String);
+            }
+            reader.readAsDataURL(file);
+        }
+
+        function displayString() {
+            console.log("Base64String about to be printed");
+            document.getElementById("demo").innerHTML = base64String;
+        }
+    </script>
+
+{% endblock %}

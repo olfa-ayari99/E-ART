@@ -1,0 +1,210 @@
+{% extends "base/base.html.twig" %}
+
+{% block body %}
+
+    <style>
+        .option-holder a, .option-delete a{
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .option-holder a:hover{
+            box-shadow: inset 100px 0 0 0 #94ffc4;
+            color: black;
+        }
+
+        .option-delete a:hover{
+            box-shadow: inset 100px 0 0 0 #f36363;
+            color: black;
+        }
+
+
+        /* Float cancel and delete buttons and add an equal width */
+        .cancelbtn, .deletebtn {
+            float: left;
+            width: 50%;
+        }
+
+        /* Add a color to the cancel button */
+        .cancelbtn {
+            background-color: #ccc;
+            color: black;
+        }
+
+        /* Add a color to the delete button */
+        .deletebtn {
+            background-color: #94ffc4;
+        }
+
+        /* Add padding and center-align text to the container */
+        .container {
+            padding: 16px;
+            text-align: center;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: #8080806b;
+            padding-top: 50px;
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            top: 350px;
+            background-color: #fefefe;
+            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */
+        }
+
+        /* Style the horizontal ruler */
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+
+        /* The Modal Close Button (x) */
+        .close {
+            position: absolute;
+            right: 35px;
+            top: 15px;
+            font-size: 40px;
+            font-weight: bold;
+            color: red;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #f44336;
+            cursor: pointer;
+        }
+
+        /* Clear floats */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Change styles for cancel button and delete button on extra small screens */
+        @media screen and (max-width: 300px) {
+            .cancelbtn, .deletebtn {
+                width: 100%;
+            }
+        }
+    </style>
+
+    <section class="content-section" data-background="#fffbf7">
+        <div class="container">
+            <div class="row" style="margin-top: 150px">
+                <div class="col-12">
+                    <div class="section-title text-center">
+                        <figure><img src="{{ asset("images/title-shape.png") }}" alt="Image"></figure>
+                        <h2 style="font-size: 50px">Mes Posts</h2>
+                    </div>
+                </div>
+            </div>
+            <table class="table">
+
+                <thead style="background: #94ffc4;">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col" style="text-align: center;width: 350px">Titre</th>
+                    <th scope="col" style="text-align: center;width: 350px">Sujet</th>
+                    <th scope="col" style="text-align: center;width: 350px">List commentaires</th>
+                    <th scope="col" style="text-align: center;width: 350px">Options</th>
+
+                </tr>
+                </thead>
+
+
+                <tbody>
+
+                {% for key, p in listPost %}
+                    <tr>
+                        <th scope="row">{{ key+1 }}</th>
+                        <td>
+                            <a href="{{ path('app_detail_post', {'id': p.id} ) }}"><b>{{p.titre}}</b></a>
+                        </td>
+
+                        <td><b>{{ p.sujet }}</b></td>
+                        <td>
+                            <div class="option-holder">
+                                <figure>
+                                    <img src="{{ asset("images/img.png") }}" alt="Image" style="width: 20px;height: 20px">
+                                    <a href="{{ path('app_my_commentaires', {'id': p.id})}}"><b>Suivre</b></a>
+                                </figure>
+                            </div>
+                        </td>
+                        <td >
+                            <div style="text-align: center; width:100%;">
+
+                                <div class="option-holder" style="float:left;">
+                                    <h6>
+                                        <a href="{{path('app_edit_post',{'id': p.id})}}"><i class="fas fa-edit"></i> Modifier</a>
+                                    </h6>
+
+                                </div>
+
+                                <div class="option-delete" style="float:right; ">
+                                    <h6>
+                                        <img src="{{ asset("images/supprimer.png") }}" alt="Image" style="width: 14px;height: 14px">
+                                        <a onclick="confirmDelete({{ p.id }})" ><i class="fas fa-delete"></i> Supprimer</a>
+
+                                    </h6>
+                                </div>
+
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+        <div class="modal-content" action="/action_page.php">
+            <div class="container">
+                <h3>Suppression de post</h3>
+                <h5>Voulez vous vraiment supprimer cette post ?</h5>
+
+                <div class="clearfix">
+                    <a type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Abondonner</a>
+                    <a id="btn-delete" href="aaa" type="button" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Confirmer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function confirmDelete(id){
+            document.getElementById('id01').style.display='block';
+            document.getElementById('btn-delete').href = 'deletePost/'+id;
+            console.log( document.getElementById('btn-delete').href)
+        }
+        // Get the modal
+        var modal = document.getElementById('id01');
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+{%endblock%}
