@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<title>Sponsor</title>
+
+{% block body %}
+    <h1>Sponsor</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sponsor.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom_societe</th>
+                <td>{{ sponsor.nomSociete }}</td>
+            </tr>
+            <tr>
+                <th>Type_sponsor</th>
+                <td>{{ sponsor.typeSponsor }}</td>
+            </tr>
+            <tr>
+                <th>Tel</th>
+                <td>{{ sponsor.tel }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ sponsor.montant }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_sponsor_index') }}">back to list</a>
+
+    <a href="{{ path('app_sponsor_edit', {'id': sponsor.id}) }}">edit</a>
+
+    {{ include('sponsor/_delete_form.html.twig') }}
+{% endblock %}

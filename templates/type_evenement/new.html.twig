@@ -1,0 +1,9 @@
+{% extends "base/base_admin.html.twig" %}
+
+{% block body %}
+    <h1>Create new TypeEvenement</h1>
+
+    {{ include('type_evenement/_form.html.twig') }}
+
+    <a href="{{ path('app_type_evenement_index') }}">back to list</a>
+{% endblock %}

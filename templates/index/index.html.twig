@@ -216,7 +216,7 @@
             <img src="images/title-shape.png" alt="Image" />
           </figure>
           <h6>DON’T MISS THE OPPORTUNITY</h6>
-          <h2>Upcoming Events</h2>
+          <h2>Evenement à venir</h2>
         </div>
         <!-- end section-title -->
       </div>
@@ -229,8 +229,9 @@
       </div>
       <!-- end col-3 -->
     </div>
-    <!-- end row -->
-    <div class="row justify-content-center">
+ 
+    <div class="row justify-content-center">   
+      {% for event in events %}
       <div class="col-lg-4 col-md-6">
         <div class="exhibition-box" data-scroll data-scroll-speed="-1">
           <figure>
@@ -247,73 +248,87 @@
           </figure>
           <div class="content-box">
             <h4>
-              <a href="#">Artemisia Gentileschi talk with Maria</a>
+              <a href="#">{{ event.titre }}</a>
             </h4>
-            <p>15 August – 31 October 2020</p>
+            <p>{{ event.dateDebut | date("d-M") }} – {{ event.dateFin| date("d-M-Y") }}</p>
+            <p>Sponsorisé par : {% for sponsor in event.sponsor %}
+              {{ sponsor.nomSociete }} /
+            {% endfor %}</p>
           </div>
           <!-- end content-box -->
         </div>
         <!-- end exhibition-box -->
       </div>
-      <!-- end col-4 -->
-      <div class="col-lg-4 col-md-6">
-        <div class="exhibition-box" data-scroll data-scroll-speed="1">
-          <figure>
-            <a href="#"
-              ><img src="images/event02.jpg" alt="Image" class="img"
-            /></a>
-            <div class="info">
-              <figure class="i">
-                <img src="images/icon-info.png" alt="Image" />
-              </figure>
-              <span>50% off exhibitions</span>
-            </div>
-            <!-- end info -->
-          </figure>
-          <div class="content-box">
-            <h4>
-              <a href="#">Arctic culture and climate Exhibition</a>
-            </h4>
-            <p>22 Oct 2020 - 21 Feb 2021</p>
-          </div>
-          <!-- end content-box -->
-        </div>
-        <!-- end exhibition-box -->
-      </div>
-      <!-- end col-4 -->
-      <div class="col-lg-4 col-md-6">
-        <div
-          class="exhibition-box"
-          data-scroll
-          data-scroll-speed="-0.5"
-        >
-          <figure>
-            <a href="#"
-              ><img src="images/event03.jpg" alt="Image" class="img"
-            /></a>
-            <div class="info">
-              <figure class="i">
-                <img src="images/icon-info.png" alt="Image" />
-              </figure>
-              <span>50% off exhibitions</span>
-            </div>
-            <!-- end info -->
-          </figure>
-          <div class="content-box">
-            <h4>
-              <a href="#"
-                >Thomas Becket murder and the making of a saint</a
-              >
-            </h4>
-            <p>22 Apr 2021 - 22 Aug 2021</p>
-          </div>
-          <!-- end content-box -->
-        </div>
-        <!-- end exhibition-box -->
-      </div>
+    {% endfor %}
+
       <!-- end col-4 -->
       <div class="col-12 text-center">
-        <a href="#" class="custom-button">VIEW ALL UPCOMING EVENTS</a>
+        <a href="{{ path('app_evenement_front_index') }}" class="custom-button">Tous nos évenements</a>
+      </div>
+      <!-- end col-12 -->
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end container -->
+</section>
+<section class="content-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="section-title">
+          <figure>
+            <img src="images/title-shape.png" alt="Image" />
+          </figure>
+          <h6>DON’T MISS THE OPPORTUNITY</h6>
+          <h2>Nos dernieres oeuvres</h2>
+        </div>
+        <!-- end section-title -->
+      </div>
+      <!-- end col-9 -->
+      <div class="col-lg-3">
+        <a href="{{ path('cart_index') }}" class="circle-button"
+          ><i class="fa-solid fa-cart-shopping" style="font-size:50px;"></i></a
+        >
+      </div>
+      <!-- end col-3 -->
+    </div>
+    <!-- end row -->
+    <div class="row justify-content-center">
+      {% for oeuvre in oeuvres %}
+      <div class="col-lg-4 col-md-6">
+        {% if oeuvre.wishlist != null %}
+        <a href="{{ path('app_oeuvre_wishlist_add' , {'id' : oeuvre.id}) }}"><i class="far fa-heart" style="color:red;"></i></a>
+        {% else %}
+        <a href="{{ path('app_oeuvre_wishlist_add' , {'id' : oeuvre.id}) }}"><i class="far fa-heart" ></i></a>
+        {% endif %}
+        <div class="exhibition-box" data-scroll data-scroll-speed="-1">
+          <figure>
+            <a href="{{ path('app_oeuvre_show' , {'id' : oeuvre.id}) }}"
+              ><img src="/uploads/oeuvres/{{ oeuvre.image }}" alt="Image" class="img"
+            /></a>
+            <div class="info">
+              <figure class="i">
+                <img src="images/icon-info.png" alt="Image" />
+              </figure>
+              <span>50% off exhibitions</span>
+            </div>
+            <!-- end info -->
+          </figure>
+          <div class="content-box">
+            <h4>
+              <a href="#">{{ oeuvre.title }}</a>
+            </h4>
+            <p>{{ oeuvre.price }} TND</p>
+          </div>
+          <!-- end content-box -->
+        </div>
+        <!-- end exhibition-box -->
+      </div>
+      {% endfor %}
+      <!-- end col-4 -->
+      <!-- end col-4 -->
+      <div class="col-12 text-center">
+        <a href="{{ path('oeuvre_index_front') }}" class="custom-button">Liste des oeuvres</a>
       </div>
       <!-- end col-12 -->
     </div>
@@ -684,7 +699,7 @@
 <section class="content-section">
   <div class="video-bg">
     <video
-      src="/videos/video.mp4"
+      src="videos/video.mp4"
       loop
       autoplay
       playsinline

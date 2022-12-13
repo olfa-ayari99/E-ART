@@ -1,0 +1,97 @@
+{% extends "base/base.html.twig" %}
+
+
+{% block body %}
+    <style>
+        .option-holder a{
+            text-decoration: none;
+        }
+
+        .option-holder a:hover{
+            box-shadow: inset 100px 0 0 0 #94ffc4;
+            color: black;
+        }
+    </style>
+    <section class="content-section" data-background="#fffbf7">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center">
+                        <figure><img src="{{ asset("images/title-shape.png") }}" alt="Image"></figure>
+                        <h2 style="font-size: 50px">Our Posts are most important</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div  class="row">
+                <div class="col-12">
+                    <div class="section-title text-center">
+                        <div style="width:100%;">
+
+
+                            <div class="option-holder" style="float:left;">
+                                <h4><a href="{{path('app_add_post')}}">Ajouter Post</a></h4>
+                            </div>
+
+                            <div class="option-holder" style="float:right;">
+                                <h4><a href="post+.htm.twig">Post plus commenter</a></h4>
+                            </div>
+
+                            <div class="option-holder" style="margin:0 auto;">
+                                <h4><a href="{{path('app_my_posts')}}">Mes Posts</a></h4>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+             <div class="row justify-content-center">
+
+                {% for p in listPost %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="collection-box" data-scroll data-scroll-speed="0.5">
+                            <figure><img src="{{ asset("images/post.png") }}" alt="Image" style="width: 220px;height: 300px"></figure>
+                            <h4>
+                                <a href="{{ path('app_detail_post', {'id': p.id} ) }}">{{p.titre}}</a>
+                            </h4>
+                            <h3 color="bl">
+                             <p2 style="color:springgreen">Sujet:<p style="color:darkblue">{{p.sujet}}</p></p2>
+                            </h3>
+                        </div>
+                        <div class="option-holder">
+                            <figure>
+                                <img src="{{ asset("images/img.png") }}" alt="Image" style="width: 20px;height: 20px">
+                                <a href="{{ path('app_my_commentaires', {'id': p.id})}}"><b>Suivre Commentaires</b></a>
+                            </figure>
+                        </div>
+                    </div>
+                {% endfor %}
+                 <div>
+                 <br>
+                 <br>
+                 <br>
+                 <br>
+                 <video controls width="500" height="300" autoplay loop alt="video"  style="width: 500px;height: 300px;background-position: center">
+                         <source src="{{ asset("videos/video.mp4") }}"><
+                 </video>
+                  </div>
+             </div>
+        </div>
+
+    </section>
+
+<script>
+    function valider_formulaire()
+    {
+
+        if (count($_POST) == 0){
+            alert('Veuillez renseigner au moins un champ');
+            return false;
+        }
+        return true;
+    }</script>
+{% endblock %}
+
+
+

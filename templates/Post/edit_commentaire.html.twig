@@ -1,0 +1,36 @@
+{% extends "base/base.html.twig" %}
+{% block body %}
+    <section class="content-section" data-background="#fffbf7">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center justify-content-center">
+                        <h2 style="font-size: 50px">Modifier Commentaire</h2>
+                        <figure><img src="{{ asset("images/modif.png") }}" alt="Image" style="width: 80px;height: 80px"></figure>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                {{ form_start(commentaireForm) }}
+
+                <div class="contact-form">
+
+                    <div class="mb-3">
+                        {{ form_row(commentaireForm.comment) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_row(commentaireForm.submit) }}
+
+                    </div>
+
+                </div>
+
+                {{ form_end(commentaireForm) }}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

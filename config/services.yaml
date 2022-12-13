@@ -10,6 +10,8 @@ parameters:
             enabled: true
             binary: '%kernel.project_dir%/public/uploads/PDF'
             options: [ ]
+    oeuvres_directory: '%kernel.project_dir%/public/uploads/oeuvres'
+
 services:
     # default configuration for services in *this* file
     _defaults:

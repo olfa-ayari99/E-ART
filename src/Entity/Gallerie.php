@@ -43,7 +43,7 @@ class Gallerie
 
     #[ORM\ManyToOne(inversedBy: 'galleries', cascade: ["persist"])]
     #[ORM\JoinColumn(onDelete: "CASCADE")]
-    private ?User $user = null;
+    private ?UserGallerie $user = null;
 
 
 
@@ -121,12 +121,12 @@ class Gallerie
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUser(): ?UserGallerie
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(?UserGallerie $user): self
     {
         $this->user = $user;
 

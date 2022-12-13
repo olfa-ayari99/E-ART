@@ -30,7 +30,7 @@ class Reservation
 
     #[ORM\ManyToOne(inversedBy: 'user', cascade: ["persist"])]
     #[ORM\JoinColumn(onDelete: "CASCADE")]
-    private ?User $user = null;
+    private ?UserGallerie $user = null;
 
     /**
      * @return Gallerie|null
@@ -51,7 +51,7 @@ class Reservation
     /**
      * @return User|null
      */
-    public function getUser(): ?User
+    public function getUser(): ?UserGallerie
     {
         return $this->user;
     }
@@ -59,7 +59,7 @@ class Reservation
     /**
      * @param User|null $user
      */
-    public function setUser(?User $user): void
+    public function setUser(?UserGallerie $user): void
     {
         $this->user = $user;
     }

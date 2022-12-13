@@ -11,6 +11,7 @@ use App\Form\GallerieFormType;
 use App\Form\ReservationFormType;
 use App\Repository\GallerieRepository;
 use App\Repository\ReservationRepository;
+use App\Repository\UserGallerieRepository;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
@@ -33,6 +34,7 @@ class GallerieController extends AbstractController
 {
 
     public Session $session;
+    public ?int $IDGALLERIE = null;
 
 
     public function __construct()
@@ -52,7 +54,7 @@ class GallerieController extends AbstractController
         return $this->render("Gallerie/gallerie.html.twig", array("listGalleries" => $galleries));
     }
     #[Route('/addGallerie', name: 'app_add_gallerie')]
-    public function addGallerie(Request $request, ManagerRegistry $doctrine, UserRepository $userRepository,SluggerInterface $slugger)
+    public function addGallerie(Request $request, ManagerRegistry $doctrine, UserGallerieRepository $userRepository, SluggerInterface $slugger)
     {
         $gallerie = new Gallerie(); //création d'une instance gallerie pour l'ajouter dans la bdd.
         $currentUser = $userRepository->find(1); //récupération de propriétaire d'id = 1. Statique pour le moment.
@@ -112,10 +114,10 @@ class GallerieController extends AbstractController
 
 
     #[Route('/detailGallerie/{id}', name: 'app_detail_gallerie')]
-    public function detailGalleries($id, GallerieRepository $repository, Request $request, ManagerRegistry $doctrine, UserRepository $userRepository)
+    public function detailGalleries($id, GallerieRepository $repository, Request $request, ManagerRegistry $doctrine, UserGallerieRepository $userRepository)
     {
         $gallerie = $repository->find($id);
-
+        $this->IDGALLERIE = $id;
         $this->session->set('id', $id);
         return $this->render("Gallerie/detail_gallerie.html.twig", array("gallerie" => $gallerie));
     }
@@ -203,7 +205,7 @@ class GallerieController extends AbstractController
 
     #[Route('/reservation/{id}/{dateDebut}/{dateFin}', name: 'app_reservation')]
     public function reservation($id, $dateDebut, $dateFin, ReservationRepository $reservationRepository,
-                                GallerieRepository $gallerieRepository, UserRepository $userRepository,
+                                GallerieRepository $gallerieRepository, UserGallerieRepository $userRepository,
                                 ManagerRegistry $doctrine)
     {
         $user = $userRepository-> find(1);
@@ -225,19 +227,20 @@ class GallerieController extends AbstractController
         $em->persist($reservation);
         $em->flush();
 
-        return $this->redirectToRoute("app_send_app");
+        return $this->redirectToRoute("app_send_mail");
     }
 
 
-    #[Route('/sendMail', name: 'app_send_app')]
-    public function sendMail()
+    #[Route('/sendMailReservation', name: 'app_send_mail')]
+    public function sendMail(GallerieRepository $gallerieRepository)
     {
+        $currentGallerie = $gallerieRepository->find($this->session->get('id'));
 
         $mail = (new Email())
             ->from('oussama.miladi@esprit.tn')
             ->to('oussama.miladi@esprit.tn')
-            ->subject('Mon beau sujet')
-            ->html('<p>Ceci est mon message en HTML</p>')
+            ->subject('Réservation confirmée')
+            ->html('<p>L\'adresse de votre gallerie est : '.$currentGallerie->getAdresse().'</p>')
         ;
         $mail->getHeaders()->addTextHeader('X-Auto-Response-Suppress', 'OOF, DR, RN, NRN, AutoReply');
         $transport = Transport::fromDsn('gmail+smtp://oussama.miladi@esprit.tn:E204JMT4443@default?verify_peer=0');

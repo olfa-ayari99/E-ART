@@ -11,6 +11,42 @@
                 </li>
 
                 <li class="sidebar-menu-item">
+                    <a class="sidebar-menu-button" data-toggle="collapse" href="{{ path('app_index') }}">
+                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i>
+                        <span class="sidebar-menu-text">Consulter site</span>
+                    </a>
+                </li>
+                    <li class="sidebar-menu-item">
+                        <a class="sidebar-menu-button" href="{{ path('app_oeuvre_index') }}">
+                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">person</i>
+                            <span class="sidebar-menu-text">Gestion des Oeuvres</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                        <a class="sidebar-menu-button" href="{{ path('app_commande_index') }}">
+                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">attach_file</i>
+                            <span class="sidebar-menu-text">Gestion commande</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-menu-item">
+                    <a class="sidebar-menu-button" href="{{ path('app_type_evenement_index') }}">
+                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">create</i>
+                        <span class="sidebar-menu-text">Gestion des types d'évenement</span>
+                    </a>
+                </li>
+                <li class="sidebar-menu-item">
+                    <a class="sidebar-menu-button" href="{{ path('app_sponsor_index') }}">
+                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">create</i>
+                        <span class="sidebar-menu-text">Gestion des sponsors</span>
+                    </a>
+                </li>
+                <li class="sidebar-menu-item">
+                    <a class="sidebar-menu-button" href="{{ path('app_evenement_index') }}">
+                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">create</i>
+                        <span class="sidebar-menu-text">Gestion des évenements</span>
+                    </a>
+                </li>
+                <li class="sidebar-menu-item">
                     <a class="sidebar-menu-button" href="{{ path('app_admin_list_galleries') }}">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i>
                         <span class="sidebar-menu-text">Liste Galleries</span>
@@ -23,7 +59,6 @@
                         <span class="sidebar-menu-text">Liste Reservations</span>
                     </a>
                 </li>
-
             </ul>
 
         </div>

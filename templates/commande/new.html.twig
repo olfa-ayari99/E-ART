@@ -1,0 +1,11 @@
+{% extends "base/base.html.twig" %}
+
+{% block body %}
+    <center>
+        <h2>Informations commande</h2>
+    </center>
+
+    {{ include('commande/_form.html.twig') }}
+
+    <a href="{{ path('cart_index') }}" class="btn ">Retourner au panier</a>
+{% endblock %}

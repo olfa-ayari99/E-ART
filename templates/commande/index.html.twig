@@ -1,0 +1,79 @@
+{% extends "base/base_admin.html.twig" %}
+
+{% block body %}
+    {% for message in app.flashes('success_message') %}
+        <div class="alert alert-dismissible bg-success text-white border-0 fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <strong>Success - </strong> {{ message }}
+        </div>
+    {% endfor %}
+    
+    <h1>Liste des Commandes</h1>
+    <div class="container">
+        <div class="row">
+            <div class="table-responsive border-bottom" data-toggle="lists" data-lists-values="[&quot;js-lists-values-employee-name&quot;]">
+
+                <div class="search-form search-form--light m-3">
+                    <input type="text" class="form-control search" placeholder="Rechercher...">
+                    <button class="btn" type="button"><i class="material-icons">search</i></button>
+                </div>
+        
+                <table class="table mb-0 thead-border-top-0">
+                    <thead>
+                        <tr>
+        
+                            <th>ID</th>
+                            <th>Adresse livraison</th>
+                            <th>Tel</th>
+                            <th>Crée lors</th>
+                            <th>Total</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="list" id="staff02"><tr>
+                        {% for commande in commandes %}
+                            <tr>
+                                <td>{{ commande.id }}</td>
+                                <td>{{ commande.adresseLivraison }}</td>
+                                <td>{{ commande.tel }}</td>
+                                <td>{{ commande.createdAt ? commande.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>{{ commande.total }}</td>
+                                <td>
+                                    <a href="{{ path('app_commande_edit', {'id': commande.id}) }}" class="btn btn-success btn-rounded" style="margin-bottom:10px;">
+                                        <i class="tiny material-icons">create</i>
+                                    </a>
+                                    <a href="#" class="btn btn-danger btn-rounded" onclick="Swal.fire({
+                                        title: 'Etes-vous sur  ?',
+                                        icon: 'question',
+                                        showDenyButton: true,
+                                        confirmButtonText: 'Supprimer',
+                                        denyButtonText: `Annuler`,
+                                      }).then((result) => {
+                                        /* Read more about isConfirmed, isDenied below */
+                                        if (result.isConfirmed) {
+                                          Swal.fire('Supprimé!', '', 'success')
+                                          window.location.href = `{{ path('app_commande_delete', {'id': commande.id}) }}`
+                                        } else if (result.isDenied) {
+                                          Swal.fire('Annulé', '', 'warning')
+                                        }
+                                      })">
+                                        <i class="tiny material-icons">close</i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7">no records found</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    
+{% endblock %}

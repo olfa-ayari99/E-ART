@@ -1,0 +1,9 @@
+{% extends "base/base_admin.html.twig" %}
+
+{% block body %}
+    <h1>Edit Sponsor</h1>
+
+    {{ include('sponsor/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a href="{{ path('app_sponsor_index') }}" class="btn btn-primary">Retourner à la liste</a>
+{% endblock %}
