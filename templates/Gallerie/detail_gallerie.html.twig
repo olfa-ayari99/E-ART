@@ -1,0 +1,260 @@
+{% extends "base/base.html.twig" %}
+
+
+{% block body %}
+
+
+
+	<style>
+
+
+		.btn-reservation{
+			height: 60px;
+			line-height: 60px;
+			display: inline-block;
+			padding: 0 40px;
+			background: #94ffc4;
+			color: #080808;
+			font-size: 14px;
+			font-weight: 700;
+			transition: .25s
+		}
+
+		.btn-reservation-holder a:hover {
+			text-decoration: none;
+			background: #080808;
+			color: #fff;
+		}
+
+		.cancelbtn, .confirmbtn {
+			float: left;
+			width: 50%;
+		}
+
+		/* Add a color to the cancel button */
+		.cancelbtn {
+			background-color: #ccc;
+			color: black;
+		}
+
+		/* Add a color to the delete button */
+		.confirmbtn {
+			background-color: #94ffc4;
+		}
+
+		/* Add padding and center-align text to the container */
+		.container {
+			padding: 16px;
+			text-align: center;
+		}
+
+		/* The Modal (background) */
+		.modal {
+			display: none; /* Hidden by default */
+			position: fixed; /* Stay in place */
+			z-index: 1; /* Sit on top */
+			left: 0;
+			top: 0;
+			width: 100%; /* Full width */
+			height: 100%; /* Full height */
+			overflow: auto; /* Enable scroll if needed */
+			background-color: #8080806b;
+			padding-top: 50px;
+		}
+
+		/* Modal Content/Box */
+		.modal-content {
+			top: 350px;
+			background-color: #fefefe;
+			margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+			border: 1px solid #888;
+			width: 50%; /* Could be more or less, depending on screen size */
+		}
+
+		/* Style the horizontal ruler */
+		hr {
+			border: 1px solid #f1f1f1;
+			margin-bottom: 25px;
+		}
+
+		/* The Modal Close Button (x) */
+		.close {
+			position: absolute;
+			right: 35px;
+			top: 15px;
+			font-size: 40px;
+			font-weight: bold;
+			color: red;
+		}
+
+		.close:hover,
+		.close:focus {
+			color: #f44336;
+			cursor: pointer;
+		}
+
+		/* Clear floats */
+		.clearfix::after {
+			content: "";
+			clear: both;
+			display: table;
+		}
+
+		/* Change styles for cancel button and delete button on extra small screens */
+		@media screen and (max-width: 300px) {
+			.cancelbtn, .confirmbtn {
+				width: 100%;
+			}
+		}
+	</style>
+
+	<section class="content-section" data-background="#fffbf7">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="section-title text-center justify-content-center">
+						<figure><img src="{{ asset("images/title-shape.png") }}" alt="Image"></figure>
+						<h2 style="font-size: 50px">Reservation de Gallerie</h2>
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="row align-items-center">
+				<div class="row" style="text-align: center">
+					<div class="col-4">
+						<figure>
+							<i class="fas fa-dollar-sign" style="font-size:25px"></i>
+						</figure>
+						<div class="content">
+							<h5>Prix Par Jour</h5>
+							<p>{{ gallerie.prix }}Dt</p>
+						</div>
+					</div>
+					<div class="col-4">
+						<figure>
+							<i class="fas fa-info" style="font-size:25px"></i>
+						</figure>
+						<div class="content">
+							<h5>Description</h5>
+							<p>{{ gallerie.description }}</p>
+						</div>
+					</div>
+					<div class="col-4">
+						<figure>
+							<i class="fas fa-map-marker-alt" style="font-size:25px"></i>
+						</figure>
+						<div class="content">
+							<h5>Adresse</h5>
+							<p>{{ gallerie.adresse }}</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="row" style="margin-top: 40px">
+					<div class="col-lg-7">
+
+
+						<div class="side-icon-list right-side">
+							<div id="calendar-holder"></div>
+						</div>
+
+
+
+					</div>
+					<div class="col-lg-5">
+						<figure class="side-image is-inview" data-scroll="" data-scroll-speed="1" style="transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 48.85, 0, 1);">
+							<img src="{{ asset('uploads/galleries/' ~ gallerie.image) }}" alt="Image">
+						</figure>
+						<br>
+						<div class="row">
+							<div class="col-4">
+
+							</div>
+							<div class="col-6">
+								<div class="btn-reservation-holder">
+									<a onclick="OpenModal({{ gallerie.id }})" class="btn-reservation">Réserver</a>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div id="id02" class="modal">
+		<span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">×</span>
+		<div class="modal-content" >
+			<div class="container">
+				<h3>Réservation de gallerie</h3>
+				<h5>Voulez vous vraiment confirmer cette réservation ?</h5>
+				<br>
+				<h6 id="recap-reservation"></h6>
+				<br>
+				<div class="clearfix">
+					<a type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Abondonner</a>
+					<a id="btn-confirm" href="" type="button" onclick="document.getElementById('id02').style.display='none'" class="confirmbtn">Confirmer</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.css">
+
+	<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
+
+	<script type="text/javascript">
+
+		var dateDebut = '';
+		var dateFin = '';
+		function OpenModal(id){
+
+			document.getElementById('id02').style.display='block';
+			document.getElementById('recap-reservation').innerHTML = 'Date début : ' + dateDebut + '&emsp;&emsp;' + 'Date fin :'+dateFin;
+			document.getElementById('btn-confirm').href = '/reservation/'+id+'/'+dateDebut+'/'+dateFin;
+		}
+		document.addEventListener('DOMContentLoaded', () => {
+		var calendarEl = document.getElementById('calendar-holder');
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			selectable: true,
+			editable: false,
+			displayEventTime: false,
+			eventSources: [
+			{
+				url: "{{ path('fc_load_events') }}",
+				method: "POST",
+				extraParams: {
+				filters: JSON.stringify({})
+				},
+				failure: () => { // alert("There was an error while fetching FullCalendar!");
+				}
+			},
+			],
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'dayGridMonth,timeGridWeek,timeGridDay'
+			},
+
+			select: function(info) {
+				dateDebut = info.startStr;
+				dateFin = info.endStr;
+			},
+
+			plugins: [
+			'interaction', 'dayGrid', 'timeGrid'
+			], // https://fullcalendar.io/docs/plugin-index
+			timeZone: 'UTC'
+			});
+		calendar.render();
+		});
+	</script>
+{% endblock %}

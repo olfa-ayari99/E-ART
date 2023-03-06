@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <meta charset="UTF-8" />
     <title>{% block title %}E-art{% endblock %}</title>
@@ -11,44 +12,50 @@
     {# Run `composer require symfony/webpack-encore-bundle` to start using
     Symfony UX #} {% block stylesheets %}
     <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="theme-color" content="#feed01"/>
-<title>Wandau | Art & History Museum</title>
-<meta name="author" content="Themezinho">
-<meta name="description" content="For all kind of exhibition museum website">
-<meta name="keywords" content="wandau, exhibition, museum, art, history, entry, ticket, contemporary, modern, booking, visit, culture, life, centuries, roots, fancy, themezinho">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#feed01"/>
+    <title>Wandau | Art & History Museum</title>
+    <meta name="author" content="Themezinho">
+    <meta name="description" content="For all kind of exhibition museum website">
+    <meta
+            name="keywords" content="wandau, exhibition, museum, art, history, entry, ticket, contemporary, modern, booking, visit, culture, life, centuries, roots, fancy, themezinho">
 
-<!-- SOCIAL MEDIA META -->
-<meta property="og:description" content="Wandau | Art & History Museum">
-<meta property="og:image" content="http://www.themezinho.net/wandau/preview.png">
-<meta property="og:site_name" content="wandau">
-<meta property="og:title" content="wandau">
-<meta property="og:type" content="website">
-<meta property="og:url" content="http://www.themezinho.net/wandau">
+    <!-- SOCIAL MEDIA META -->
+    <meta property="og:description" content="Wandau | Art & History Museum">
+    <meta property="og:image" content="http://www.themezinho.net/wandau/preview.png">
+    <meta property="og:site_name" content="wandau">
+    <meta property="og:title" content="wandau">
+    <meta property="og:type" content="website">
+    <meta
+            property="og:url" content="http://www.themezinho.net/wandau">
 
-<!-- TWITTER META -->
-<meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="@wandau">
-<meta name="twitter:creator" content="@wandau">
-<meta name="twitter:title" content="wandau">
-<meta name="twitter:description" content="Wandau | Art & History Museum">
-<meta name="twitter:image" content="http://www.themezinho.net/wandau/preview.png">
+    <!-- TWITTER META -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@wandau">
+    <meta name="twitter:creator" content="@wandau">
+    <meta name="twitter:title" content="wandau">
+    <meta name="twitter:description" content="Wandau | Art & History Museum">
+    <meta
+            name="twitter:image" content="http://www.themezinho.net/wandau/preview.png">
 
-<!-- FAVICON FILES -->
-<link href="ico/apple-touch-icon-144-precomposed.png" rel="apple-touch-icon" sizes="144x144">
-<link href="ico/apple-touch-icon-114-precomposed.png" rel="apple-touch-icon" sizes="114x114">
-<link href="ico/apple-touch-icon-72-precomposed.png" rel="apple-touch-icon" sizes="72x72">
-<link href="ico/apple-touch-icon-57-precomposed.png" rel="apple-touch-icon">
-<link href="ico/favicon.png" rel="shortcut icon">
+    <!-- FAVICON FILES -->
+    <link href="ico/apple-touch-icon-144-precomposed.png" rel="apple-touch-icon" sizes="144x144">
+    <link href="ico/apple-touch-icon-114-precomposed.png" rel="apple-touch-icon" sizes="114x114">
+    <link href="ico/apple-touch-icon-72-precomposed.png" rel="apple-touch-icon" sizes="72x72">
+    <link href="ico/apple-touch-icon-57-precomposed.png" rel="apple-touch-icon">
+    <link
+            href="ico/favicon.png" rel="shortcut icon">
+
 
 <!-- CSS FILES -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="/css/fontawesome.min.css">
-<link rel="stylesheet" href="/css/odometer.min.css">
-<link rel="stylesheet" href="/css/fancybox.min.css">
-<link rel="stylesheet" href="/css/swiper.min.css">
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+      <link rel="stylesheet" href="{{ asset("css/fontawesome.min.css") }}">
+      <link rel="stylesheet" href="{{ asset("css/odometer.min.css") }}">
+      <link rel="stylesheet" href="{{ asset("css/fancybox.min.css") }}">
+      <link rel="stylesheet" href="{{ asset("css/swiper.min.css") }}">
+      <link rel="stylesheet" href="{{ asset("css/bootstrap.min.css") }}">
+
+       <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 <style>
   .fa-heart{
@@ -112,11 +119,11 @@
             <svg viewBox="0 0 600 1080" preserveAspectRatio="none" version="1.1">
               <path d="M540,1080H0V0h540c0,179.85,0,359.7,0,539.54C540,719.7,540,899.85,540,1080z"></path>
             </svg>
-            <figure class="logo"> <img src="images/logo-light.png" alt="Image"> </figure>
+            <figure class="logo"> <img src={{ asset("images/logo.png") }} alt="Image"> </figure>
             <!-- end logo -->
             <div class="inner">
               <div class="widget">
-                <figure><img src="images/image07.jpg" alt="Image"></figure>
+                <figure><img src={{ asset("images/image07.jpg") }} alt="Image"></figure>
                 <p>It speedily me addition <strong>weddings vicinity</strong> in pleasure. Happiness commanded an conveying breakfast in. Regard her say warmly elinor. Him these are visit front end for <u>seven walls</u>. Money eat scale now ask law learn.</p>
               </div>
               <!-- end widget -->
@@ -129,19 +136,19 @@
             </div>
             <!-- end inner --> 
               <div class="display-mobile">
-                  <div class="custom-menu">
-              <ul>
-                <li><a href="#">Eng</a></li>
-                <li><a href="#">Rus</a></li>
-              </ul>
-            </div>
+                <div class="custom-menu">
+                  <ul>
+                    <li><a href="http://127.0.0.1:8000/login">Sign In</a></li>
+                    <li><a href="http://127.0.0.1:8000/register">Sign Up</a></li>
+                  </ul>
+                </div>
             <!-- end custom-menu -->
             <div class="site-menu">
               <ul>
                 <li><a href="visit.html">Visit</a></li>
                 <li><a href="exhibitions.html">Exhibitions</a></li>
-                <li><a href="collections.html">Collections</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="{{path('app_galleries')}}">Galleries</a></li>
+                <li><a href="{{ path('app_posts') }}">Posts</a></li>
                 <li><a href="contact.html">Contact</a></li>
               </ul>
             </div>
@@ -150,12 +157,12 @@
               <!-- end display-mobile -->
           </aside>
           <nav class="navbar">
-            <div class="logo"> <a href="{{ path('app_index') }}"> <img src="images/logo.png" alt="Image"> </a> </div>
+            <div class="logo"> <a href="{{ path('app_index') }}"> <img src={{ asset("images/logo.png") }} alt="Image"> </a> </div>
             <!-- end logo -->
             <div class="custom-menu">
               <ul>
-                <li><a href="#">Eng</a></li>
-                <li><a href="#">Rus</a></li>
+                <li><a href="http://127.0.0.1:8000/login">Sign In</a></li>
+                <li><a href="http://127.0.0.1:8000/register">Sign Up</a></li>
               </ul>
             </div>
             <!-- end custom-menu -->
@@ -163,14 +170,14 @@
               <ul>
                 <li><a href="visit.html">Visit</a></li>
                 <li><a href="exhibitions.html">Exhibitions</a></li>
-                <li><a href="collections.html">Collections</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="{{path('app_galleries')}}">Galleries</a></li>
+                <li><a href="{{ path('app_posts') }}">Posts</a></li>
                 <li><a href="contact.html">Contact</a></li>
               </ul>
             </div>
             <!-- end site-menu -->
             <a href="{{ path('app_oeuvre_wishlist_index') }}"><i class="far fa-heart" ></i></a>
-            <div class="search-button"> 
+            <div class="search-button">
               <i class="far fa-search"></i> </div>
             <!-- end search-button -->
             <div class="hamburger-menu">
@@ -231,6 +238,30 @@
           </footer>
           <!-- end footer --> 
         </div>
+        <!-- end form -->
+        <div class="search-events">
+          <ul>
+            <li>
+              <h5>
+                <a href="#">Artemisia Gentileschi talk with Maria</a>
+              </h5>
+              <small>15 August – 31 October 2020</small>
+            </li>
+            <li>
+              <h5>
+                <a href="#">Artemisia Gentileschi talk with Maria</a>
+              </h5>
+              <small>15 August – 31 October 2020</small>
+            </li>
+            <li>
+              <h5>
+                <a href="#">Artemisia Gentileschi talk with Maria</a>
+              </h5>
+              <small>15 August – 31 October 2020</small>
+            </li>
+          </ul>
+        </div>
+        <!-- end search-events -->
       </div>
     {% block javascripts %}
     <!-- jQuery Min JS -->

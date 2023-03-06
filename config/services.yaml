@@ -4,6 +4,12 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    galleries_directory: '%kernel.project_dir%/public/uploads/galleries'
+    knp_snappy:
+        pdf:
+            enabled: true
+            binary: '%kernel.project_dir%/public/uploads/PDF'
+            options: [ ]
     oeuvres_directory: '%kernel.project_dir%/public/uploads/oeuvres'
 
 services:
@@ -23,3 +29,4 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+

@@ -1,0 +1,40 @@
+{% block body %}
+<style>
+    table, th, td, tbody {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+
+</style>
+    <table>
+
+        <thead style="background: #1C2260">
+        <tr>
+            <th scope="col" style="color: white; width: 50px">#</th>
+            <th scope="col" style="width: 300px;color: white">Adresse</th>
+            <th scope="col" style="width: 120px;color: white">Prix</th>
+            <th scope="col" style="text-align: center;width: 350px;color: white">Description</th>
+            <th scope="col" style="text-align: center;width: 300px;color: white">Image</th>
+        </tr>
+        </thead>
+
+
+        <tbody>
+        {% for key, g in listGalleries %}
+            <tr>
+                <th scope="row">{{ key+1 }}</th>
+                <td>{{ g.adresse }}</td>
+                <td>{{ g.prix }} Dt/Jour</td>
+                <td>{{ g.description }}</td>
+                <td><img src="{{ 'http://127.0.0.1:8000/uploads/galleries/' ~ g.image }}" alt="Image" style="width: 180px;height: 180px"></td>
+
+            </tr>
+        {% endfor %}
+
+
+
+        </tbody>
+
+    </table>
+{% endblock %}

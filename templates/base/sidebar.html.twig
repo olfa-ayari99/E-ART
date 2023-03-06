@@ -4,11 +4,12 @@
             <div class="sidebar-heading">Menu</div>
             <ul class="sidebar-menu">
                 <li class="sidebar-menu-item">
-                    <a class="sidebar-menu-button" data-toggle="collapse" href="{{ path('app_admin') }}">
+                    <a class="sidebar-menu-button" href="{{ path('app_admin') }}">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i>
                         <span class="sidebar-menu-text">Dashboard</span>
                     </a>
                 </li>
+
                 <li class="sidebar-menu-item">
                     <a class="sidebar-menu-button" data-toggle="collapse" href="{{ path('app_index') }}">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i>
@@ -43,6 +44,19 @@
                     <a class="sidebar-menu-button" href="{{ path('app_evenement_index') }}">
                         <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">create</i>
                         <span class="sidebar-menu-text">Gestion des évenements</span>
+                    </a>
+                </li>
+                <li class="sidebar-menu-item">
+                    <a class="sidebar-menu-button" href="{{ path('app_admin_list_galleries') }}">
+                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i>
+                        <span class="sidebar-menu-text">Liste Galleries</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-menu-item">
+                    <a class="sidebar-menu-button" href="{{ path('app_admin_list_reservations') }}">
+                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i>
+                        <span class="sidebar-menu-text">Liste Reservations</span>
                     </a>
                 </li>
             </ul>
